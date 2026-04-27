@@ -1,0 +1,33 @@
+{
+  "generator-jhipster": {
+    "applicationType": "gateway",
+    "authenticationType": "jwt",
+    "baseName": "SMO-Connect-Frontend",
+    "buildTool": "maven",
+    "cacheProvider": null,
+    "clientFramework": "angular",
+    "clientTestFrameworks": [],
+    "clientTheme": "none",
+    "creationTimestamp": 1777305530957,
+    "databaseType": "no",
+    "devDatabaseType": null,
+    "enableHibernateCache": null,
+    "enableTranslation": true,
+    "entities": [],
+    "feignClient": null,
+    "jhipsterVersion": "9.0.0",
+    "jwtSecretKey": "ZmIyYTJmODg3ZGI0NWY5M2VjMGEwOGE4YTIxYmNiMTA1MmYyN2UzZjNhNTk3N2RlMWE2YjhiMTU0NTkyMTllOTEyNjc0ZWNlNTY2NmY4NGU2ZGFjODg2ZmM2NjUxNGNkMDBkZDFkNGM2MTIzODhkNzdlM2U5OTBkOWNmYWZjYTI=",
+    "languages": ["en"],
+    "microfrontend": false,
+    "microfrontends": [],
+    "nativeLanguage": "en",
+    "packageName": "com.mycompany.myapp",
+    "prodDatabaseType": null,
+    "reactive": true,
+    "serverPort": "8080",
+    "serviceDiscoveryType": "consul",
+    "syncUserWithIdp": null,
+    "testFrameworks": [],
+    "withAdminUi": true
+  }
+}
