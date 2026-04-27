@@ -25,20 +25,21 @@
         };
       };
 
-      const getBearerToken = () => {
-        let authToken = localStorage.getItem('jhi-authenticationToken') || sessionStorage.getItem('jhi-authenticationToken');
-        if (authToken) {
-          authToken = JSON.parse(authToken);
-          return `Bearer ${authToken}`;
+      function getCSRF() {
+        const name = 'XSRF-TOKEN=';
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) === ' ') c = c.substring(1);
+          if (c.includes(name)) return c.substring(name.length, c.length);
         }
-        return null;
-      };
+        return '';
+      }
 
       function createAxiosConfig(serverBaseUri) {
         return {
           timeout: 5000,
           baseURL: serverBaseUri,
-          headers: { Authorization: getBearerToken() },
         };
       }
 
@@ -127,7 +128,7 @@
           plugins: [SwaggerUIBundle.plugins.DownloadUrl, AlwaysEnableTryItOutPlugin],
           tryItOutEnabled: true,
           requestInterceptor: function (req) {
-            req.headers['Authorization'] = getBearerToken();
+            req.headers['X-XSRF-TOKEN'] = getCSRF();
             // Remove the sample Swagger UI request body if present
             if (req.method === 'GET' && req.body === '{"additionalProp1":"string","additionalProp2":"string","additionalProp3":"string"}') {
               req.body = undefined;

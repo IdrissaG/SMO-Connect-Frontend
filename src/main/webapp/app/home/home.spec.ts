@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it, vitest } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
 import { AccountService } from 'app/core/auth/account.service';
+import { LoginService } from 'app/login/login.service';
 
 import Home from './home';
 
@@ -13,7 +13,7 @@ describe('Home Component', () => {
   let comp: Home;
   let fixture: ComponentFixture<Home>;
   let mockAccountService: AccountService;
-  let mockRouter: Router;
+  let mockLoginService: LoginService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -25,6 +25,12 @@ describe('Home Component', () => {
             isAuthenticated: vitest.fn(),
           },
         },
+        {
+          provide: LoginService,
+          useValue: {
+            login: vitest.fn(),
+          },
+        },
       ],
     });
   });
@@ -34,18 +40,16 @@ describe('Home Component', () => {
     comp = fixture.componentInstance;
     mockAccountService = TestBed.inject(AccountService);
     mockAccountService.identity = vitest.fn(() => of(null));
-
-    mockRouter = TestBed.inject(Router);
-    vitest.spyOn(mockRouter, 'navigate');
+    mockLoginService = TestBed.inject(LoginService);
   });
 
   describe('login', () => {
-    it('should navigate to /login on login', () => {
+    it('should call loginService.login on login', () => {
       // WHEN
       comp.login();
 
       // THEN
-      expect(mockRouter.navigate).toHaveBeenCalledWith(['/login']);
+      expect(mockLoginService.login).toHaveBeenCalled();
     });
   });
 });

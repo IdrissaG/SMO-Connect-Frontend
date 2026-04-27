@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 
 import { AccountService } from 'app/core/auth/account.service';
+import { LoginService } from 'app/login/login.service';
 import { TranslateDirective } from 'app/shared/language';
 
 @Component({
@@ -15,9 +15,9 @@ import { TranslateDirective } from 'app/shared/language';
 export default class Home {
   public readonly account = inject(AccountService).account;
 
-  private readonly router = inject(Router);
+  private readonly loginService = inject(LoginService);
 
   login(): void {
-    this.router.navigate(['/login']);
+    this.loginService.login();
   }
 }

@@ -77,7 +77,7 @@ export default class Navbar implements OnInit {
   }
 
   login(): void {
-    this.router.navigate(['/login']);
+    this.loginService.login();
   }
 
   logout(): void {

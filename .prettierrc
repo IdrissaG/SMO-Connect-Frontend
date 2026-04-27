@@ -8,9 +8,5 @@ overrides:
   - files: "*.html"
     options:
       parser: angular
-  - files: "*.java"
-    options:
-      tabWidth: 4
 plugins:
   - prettier-plugin-packagejson
-  - prettier-plugin-java

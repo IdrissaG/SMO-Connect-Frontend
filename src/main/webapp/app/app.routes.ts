@@ -25,11 +25,6 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.routes'),
   },
   {
-    path: 'login',
-    loadComponent: () => import('./login/login'),
-    title: 'login.title',
-  },
-  {
     path: '',
     loadChildren: () => import('./entities/entity.routes'),
   },

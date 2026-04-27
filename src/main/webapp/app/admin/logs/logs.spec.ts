@@ -4,8 +4,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { of } from 'rxjs';
 
-import { GatewayRoutesService } from '../gateway/gateway-routes.service';
-
 import { Log, LoggersResponse } from './log.model';
 import Logs from './logs';
 import { LogsService } from './logs.service';
@@ -18,7 +16,7 @@ describe('Logs', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Logs],
-      providers: [provideHttpClientTesting(), LogsService, GatewayRoutesService],
+      providers: [provideHttpClientTesting(), LogsService],
     }).compileComponents();
   });
 

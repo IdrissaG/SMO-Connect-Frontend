@@ -17,8 +17,7 @@ export const authExpiredInterceptor: HttpInterceptorFn = (req, next) => {
       error(err: HttpErrorResponse) {
         if (err.status === 401 && err.url && !err.url.includes('api/account')) {
           stateStorageService.storeUrl(router.routerState.snapshot.url);
-          loginService.logout();
-          router.navigate(['/login']);
+          loginService.login();
         }
       },
     }),
