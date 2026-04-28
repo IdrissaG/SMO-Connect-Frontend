@@ -1,0 +1,85 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165516"
+  },
+  "applications": ["*"],
+  "documentation": "Blacklist - Agents interdits de recrutement",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "mobile",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "cni",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "254"
+    },
+    {
+      "fieldName": "faute",
+      "fieldType": "TypeFaute",
+      "fieldValues": "FRAUDE,ARNAQUE,COMPORTEMENT_ANORMAL,ABSENCE_NON_JUSTIFIEE,AUTRE"
+    },
+    {
+      "fieldName": "commentaire",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "dateFaits",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateDetection",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateRemontee",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Blacklist",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "prestataire",
+      "relationshipName": "prestataire",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "plateau",
+      "relationshipName": "plateau",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

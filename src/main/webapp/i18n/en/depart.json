@@ -1,0 +1,29 @@
+{
+  "smoConnectFrontendApp": {
+    "depart": {
+      "home": {
+        "title": "Departs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Depart",
+        "createOrEditLabel": "Create or edit a Depart",
+        "notFound": "No Departs found"
+      },
+      "created": "A new Depart is created with identifier {{ param }}",
+      "updated": "A Depart is updated with identifier {{ param }}",
+      "deleted": "A Depart is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Depart {{ id }}?"
+      },
+      "detail": {
+        "title": "Depart"
+      },
+      "id": "ID",
+      "dateDepart": "Date Depart",
+      "motifDepart": "Motif Depart",
+      "desistementFormation": "Desistement Formation",
+      "dateRemontee": "Date Remontee",
+      "envoyeTidji": "Envoye Tidji",
+      "effectif": "Effectif"
+    }
+  }
+}

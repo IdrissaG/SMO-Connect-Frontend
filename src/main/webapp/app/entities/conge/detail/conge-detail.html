@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (conge(); as congeRef) {
+      <div>
+        <h2 data-cy="congeDetailsHeading"><span jhiTranslate="smoConnectFrontendApp.conge.detail.title">Conge</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ congeRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.conge.dateDebut">Date Debut</span></dt>
+          <dd>
+            <span>{{ congeRef.dateDebut | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.conge.dateRetour">Date Retour</span></dt>
+          <dd>
+            <span>{{ congeRef.dateRetour | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.conge.effectif">Effectif</span></dt>
+          <dd>
+            @if (conge()!.effectif) {
+              <div>
+                <a [routerLink]="['/effectif', conge()!.effectif?.id, 'view']">{{ congeRef.effectif?.nom }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.conge.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ congeRef.createdBy?.id }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/conge', congeRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

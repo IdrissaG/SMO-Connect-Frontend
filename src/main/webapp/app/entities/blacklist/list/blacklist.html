@@ -1,0 +1,220 @@
+<div>
+  <h2 id="page-heading" data-cy="BlacklistHeading">
+    <span jhiTranslate="smoConnectFrontendApp.blacklist.home.title">Blacklists</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="smoConnectFrontendApp.blacklist.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-blacklist"
+        [routerLink]="['/blacklist/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="smoConnectFrontendApp.blacklist.home.createLabel">Créer un nouveau Blacklist</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (blacklists().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="smoConnectFrontendApp.blacklist.home.notFound">Aucun Blacklist trouvé</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nom">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.nom">Nom</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prenom">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.prenom">Prenom</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mobile">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.mobile">Mobile</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cni">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.cni">Cni</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="faute">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.faute">Faute</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="commentaire">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.commentaire">Commentaire</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateFaits">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.dateFaits">Date Faits</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateDetection">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.dateDetection">Date Detection</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateRemontee">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.dateRemontee">Date Remontee</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="active">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.active">Active</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prestataire.nom">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.prestataire">Prestataire</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="plateau.nom">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.blacklist.plateau">Plateau</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (blacklist of blacklists(); track trackId(blacklist)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/blacklist', blacklist.id, 'view']">{{ blacklist.id }}</a>
+              </td>
+              <td>{{ blacklist.nom }}</td>
+              <td>{{ blacklist.prenom }}</td>
+              <td>{{ blacklist.mobile }}</td>
+              <td>{{ blacklist.cni }}</td>
+              <td>{{ blacklist.email }}</td>
+              <td [jhiTranslate]="'smoConnectFrontendApp.TypeFaute.' + (blacklist.faute ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    FRAUDE: 'FRAUDE',
+                    ARNAQUE: 'ARNAQUE',
+                    COMPORTEMENT_ANORMAL: 'COMPORTEMENT_ANORMAL',
+                    ABSENCE_NON_JUSTIFIEE: 'ABSENCE_NON_JUSTIFIEE',
+                    AUTRE: 'AUTRE',
+                  }[blacklist.faute ?? 'null']
+                }}
+              </td>
+              <td>{{ blacklist.commentaire }}</td>
+              <td>{{ blacklist.dateFaits | formatMediumDate }}</td>
+              <td>{{ blacklist.dateDetection | formatMediumDate }}</td>
+              <td>{{ blacklist.dateRemontee | formatMediumDate }}</td>
+              <td>{{ blacklist.active }}</td>
+              <td>
+                @if (blacklist.prestataire) {
+                  <div>
+                    <a [routerLink]="['/prestataire', blacklist.prestataire.id, 'view']">{{ blacklist.prestataire.nom }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (blacklist.plateau) {
+                  <div>
+                    <a [routerLink]="['/plateau', blacklist.plateau.id, 'view']">{{ blacklist.plateau.nom }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/blacklist', blacklist.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/blacklist', blacklist.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(blacklist)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (blacklists().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165512"
+  },
+  "applications": ["*"],
+  "documentation": "Depart - Enregistrement du départ d'un agent",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "dateDepart",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "motifDepart",
+      "fieldType": "MotifDepart",
+      "fieldValues": "DEMISSION,LICENCIEMENT,FIN_DE_CONTRAT,RETRAITE,ABANDON_DE_POSTE,RUPTURE_CONVENTIONNELLE,DEPART_VOLONTAIRE,MUTATION,INAPTITUDE_MEDICALE,DECES,AUTRE"
+    },
+    {
+      "fieldName": "desistementFormation",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateRemontee",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "envoyeTidji",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Depart",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "effectif",
+      "otherEntityRelationshipName": "departs",
+      "relationshipName": "effectif",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceClass"
+}

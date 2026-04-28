@@ -1,0 +1,33 @@
+{
+  "smoConnectFrontendApp": {
+    "emailTraite": {
+      "home": {
+        "title": "EmailTraites",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Email Traite",
+        "createOrEditLabel": "Créer ou éditer un Email Traite",
+        "notFound": "Aucun Email Traite trouvé"
+      },
+      "created": "Un nouveau Email Traite a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Email Traite avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Email Traite avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Email Traite {{ id }} ?"
+      },
+      "detail": {
+        "title": "Email Traite"
+      },
+      "id": "ID",
+      "messageId": "Message Id",
+      "dateReception": "Date Reception",
+      "nomExtrait": "Nom Extrait",
+      "prenomExtrait": "Prenom Extrait",
+      "applicationExtrait": "Application Extrait",
+      "loginExtrait": "Login Extrait",
+      "traiteAvecSucces": "Traite Avec Succes",
+      "erreur": "Erreur",
+      "effectif": "Effectif",
+      "resetPassword": "Reset Password"
+    }
+  }
+}

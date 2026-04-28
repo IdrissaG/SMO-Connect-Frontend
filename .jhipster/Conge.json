@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165513"
+  },
+  "applications": ["*"],
+  "documentation": "Conge - Congé déclaré pour un agent",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateRetour",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Conge",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "effectif",
+      "otherEntityRelationshipName": "conges",
+      "relationshipName": "effectif",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "user",
+      "relationshipName": "createdBy",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipWithBuiltInEntity": true
+    }
+  ],
+  "service": "serviceClass"
+}

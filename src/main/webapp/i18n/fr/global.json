@@ -8,7 +8,19 @@
       "entities": {
         "main": "Entités",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority"
+        "prestataire": "Prestataire",
+        "plateau": "Plateau",
+        "profile": "Profile",
+        "effectif": "Effectif",
+        "depart": "Depart",
+        "conge": "Conge",
+        "application": "Application",
+        "demande": "Demande",
+        "blacklist": "Blacklist",
+        "resetPassword": "Reset Password",
+        "templateModel": "Template Model",
+        "uploadLog": "Upload Log",
+        "emailTraite": "Email Traite"
       },
       "account": {
         "main": "Compte",

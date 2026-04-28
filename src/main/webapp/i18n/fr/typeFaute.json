@@ -1,0 +1,12 @@
+{
+  "smoConnectFrontendApp": {
+    "TypeFaute": {
+      "null": "",
+      "FRAUDE": "FRAUDE",
+      "ARNAQUE": "ARNAQUE",
+      "COMPORTEMENT_ANORMAL": "COMPORTEMENT_ANORMAL",
+      "ABSENCE_NON_JUSTIFIEE": "ABSENCE_NON_JUSTIFIEE",
+      "AUTRE": "AUTRE"
+    }
+  }
+}

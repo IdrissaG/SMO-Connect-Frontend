@@ -1,0 +1,18 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165514"
+  },
+  "applications": ["*"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    }
+  ],
+  "name": "Application",
+  "relationships": [],
+  "service": "serviceClass"
+}

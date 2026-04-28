@@ -1,0 +1,34 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165508"
+  },
+  "applications": ["*"],
+  "documentation": "Prestataire - Société sous-traitante gérant des agents",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    }
+  ],
+  "name": "Prestataire",
+  "relationships": [
+    {
+      "otherEntityName": "plateau",
+      "otherEntityRelationshipName": "prestataire",
+      "relationshipName": "plateaux",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "effectif",
+      "otherEntityRelationshipName": "prestataire",
+      "relationshipName": "effectifs",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,26 @@
+{
+  "smoConnectFrontendApp": {
+    "plateau": {
+      "home": {
+        "title": "Plateaus",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Plateau",
+        "createOrEditLabel": "Créer ou éditer un Plateau",
+        "notFound": "Aucun Plateau trouvé"
+      },
+      "created": "Un nouveau Plateau a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Plateau avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Plateau avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Plateau {{ id }} ?"
+      },
+      "detail": {
+        "title": "Plateau"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prestataire": "Prestataire",
+      "effectifs": "Effectifs"
+    }
+  }
+}

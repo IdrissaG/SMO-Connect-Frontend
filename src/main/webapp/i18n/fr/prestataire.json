@@ -1,0 +1,26 @@
+{
+  "smoConnectFrontendApp": {
+    "prestataire": {
+      "home": {
+        "title": "Prestataires",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Prestataire",
+        "createOrEditLabel": "Créer ou éditer un Prestataire",
+        "notFound": "Aucun Prestataire trouvé"
+      },
+      "created": "Un nouveau Prestataire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Prestataire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Prestataire avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Prestataire {{ id }} ?"
+      },
+      "detail": {
+        "title": "Prestataire"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "plateaux": "Plateaux",
+      "effectifs": "Effectifs"
+    }
+  }
+}

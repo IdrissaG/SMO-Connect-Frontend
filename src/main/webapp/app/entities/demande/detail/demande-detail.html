@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (demande(); as demandeRef) {
+      <div>
+        <h2 data-cy="demandeDetailsHeading"><span jhiTranslate="smoConnectFrontendApp.demande.detail.title">Demande</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ demandeRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.demande.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'smoConnectFrontendApp.TypeDemande.' + (demandeRef.type ?? 'null')">{{
+              { null: '', CREATION: 'CREATION', MODIFICATION: 'MODIFICATION', REACTIVATION: 'REACTIVATION', RESET: 'RESET' }[
+                demandeRef.type ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.demande.statut">Statut</span></dt>
+          <dd>
+            <span [jhiTranslate]="'smoConnectFrontendApp.EtatDemande.' + (demandeRef.statut ?? 'null')">{{
+              { null: '', EN_ATTENTE: 'EN_ATTENTE', APPROUVEE: 'APPROUVEE', REJETEE: 'REJETEE', CLOTUREE: 'CLOTUREE' }[
+                demandeRef.statut ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.demande.dateCreation">Date Creation</span></dt>
+          <dd>
+            <span>{{ demandeRef.dateCreation | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.demande.dateCloture">Date Cloture</span></dt>
+          <dd>
+            <span>{{ demandeRef.dateCloture | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.demande.typeSla">Type Sla</span></dt>
+          <dd>
+            <span>{{ demandeRef.typeSla }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/demande', demandeRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

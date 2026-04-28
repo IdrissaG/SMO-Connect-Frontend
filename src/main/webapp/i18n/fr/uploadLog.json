@@ -1,0 +1,30 @@
+{
+  "smoConnectFrontendApp": {
+    "uploadLog": {
+      "home": {
+        "title": "UploadLogs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Upload Log",
+        "createOrEditLabel": "Créer ou éditer un Upload Log",
+        "notFound": "Aucun Upload Log trouvé"
+      },
+      "created": "Un nouveau Upload Log a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Upload Log avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Upload Log avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Upload Log {{ id }} ?"
+      },
+      "detail": {
+        "title": "Upload Log"
+      },
+      "id": "ID",
+      "typeFichier": "Type Fichier",
+      "nomFichier": "Nom Fichier",
+      "nombreLignes": "Nombre Lignes",
+      "succesCount": "Succes Count",
+      "erreurCount": "Erreur Count",
+      "doublonCount": "Doublon Count",
+      "entite": "Entite"
+    }
+  }
+}

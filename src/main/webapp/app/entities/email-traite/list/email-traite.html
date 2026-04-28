@@ -1,0 +1,185 @@
+<div>
+  <h2 id="page-heading" data-cy="EmailTraiteHeading">
+    <span jhiTranslate="smoConnectFrontendApp.emailTraite.home.title">EmailTraites</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="smoConnectFrontendApp.emailTraite.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-email-traite"
+        [routerLink]="['/email-traite/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="smoConnectFrontendApp.emailTraite.home.createLabel">Créer un nouveau Email Traite</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (emailTraites().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="smoConnectFrontendApp.emailTraite.home.notFound">Aucun Email Traite trouvé</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="messageId">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.emailTraite.messageId">Message Id</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateReception">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.emailTraite.dateReception">Date Reception</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nomExtrait">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.emailTraite.nomExtrait">Nom Extrait</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prenomExtrait">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.emailTraite.prenomExtrait">Prenom Extrait</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="applicationExtrait">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.emailTraite.applicationExtrait">Application Extrait</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="loginExtrait">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.emailTraite.loginExtrait">Login Extrait</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="traiteAvecSucces">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.emailTraite.traiteAvecSucces">Traite Avec Succes</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="erreur">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.emailTraite.erreur">Erreur</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="effectif.nom">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.emailTraite.effectif">Effectif</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="resetPassword.id">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.emailTraite.resetPassword">Reset Password</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (emailTraite of emailTraites(); track trackId(emailTraite)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/email-traite', emailTraite.id, 'view']">{{ emailTraite.id }}</a>
+              </td>
+              <td>{{ emailTraite.messageId }}</td>
+              <td>{{ emailTraite.dateReception | formatMediumDatetime }}</td>
+              <td>{{ emailTraite.nomExtrait }}</td>
+              <td>{{ emailTraite.prenomExtrait }}</td>
+              <td>{{ emailTraite.applicationExtrait }}</td>
+              <td>{{ emailTraite.loginExtrait }}</td>
+              <td>{{ emailTraite.traiteAvecSucces }}</td>
+              <td>{{ emailTraite.erreur }}</td>
+              <td>
+                @if (emailTraite.effectif) {
+                  <div>
+                    <a [routerLink]="['/effectif', emailTraite.effectif.id, 'view']">{{ emailTraite.effectif.nom }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (emailTraite.resetPassword) {
+                  <div>
+                    <a [routerLink]="['/reset-password', emailTraite.resetPassword.id, 'view']">{{ emailTraite.resetPassword.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/email-traite', emailTraite.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/email-traite', emailTraite.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(emailTraite)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (emailTraites().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

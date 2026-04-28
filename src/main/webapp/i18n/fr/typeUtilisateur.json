@@ -1,0 +1,9 @@
+{
+  "smoConnectFrontendApp": {
+    "TypeUtilisateur": {
+      "null": "",
+      "INTERNE": "INTERNE",
+      "PRESTATAIRE": "PRESTATAIRE"
+    }
+  }
+}

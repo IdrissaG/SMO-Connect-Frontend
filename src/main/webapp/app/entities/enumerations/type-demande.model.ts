@@ -1,0 +1,9 @@
+export enum TypeDemande {
+  CREATION = 'CREATION',
+
+  MODIFICATION = 'MODIFICATION',
+
+  REACTIVATION = 'REACTIVATION',
+
+  RESET = 'RESET',
+}

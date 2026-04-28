@@ -1,0 +1,27 @@
+{
+  "smoConnectFrontendApp": {
+    "conge": {
+      "home": {
+        "title": "Conges",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Conge",
+        "createOrEditLabel": "Créer ou éditer un Conge",
+        "notFound": "Aucun Conge trouvé"
+      },
+      "created": "Un nouveau Conge a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Conge avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Conge avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Conge {{ id }} ?"
+      },
+      "detail": {
+        "title": "Conge"
+      },
+      "id": "ID",
+      "dateDebut": "Date Debut",
+      "dateRetour": "Date Retour",
+      "effectif": "Effectif",
+      "createdBy": "Created By"
+    }
+  }
+}

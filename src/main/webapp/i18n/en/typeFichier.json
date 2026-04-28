@@ -1,0 +1,10 @@
+{
+  "smoConnectFrontendApp": {
+    "TypeFichier": {
+      "null": "",
+      "EFFECTIF": "EFFECTIF",
+      "DEPART": "DEPART",
+      "DEPART_MANUEL": "DEPART_MANUEL"
+    }
+  }
+}

@@ -1,0 +1,153 @@
+<div>
+  <h2 id="page-heading" data-cy="UploadLogHeading">
+    <span jhiTranslate="smoConnectFrontendApp.uploadLog.home.title">UploadLogs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="smoConnectFrontendApp.uploadLog.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-upload-log"
+        [routerLink]="['/upload-log/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="smoConnectFrontendApp.uploadLog.home.createLabel">Créer un nouveau Upload Log</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (uploadLogs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="smoConnectFrontendApp.uploadLog.home.notFound">Aucun Upload Log trouvé</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="typeFichier">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.uploadLog.typeFichier">Type Fichier</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nomFichier">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.uploadLog.nomFichier">Nom Fichier</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nombreLignes">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.uploadLog.nombreLignes">Nombre Lignes</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="succesCount">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.uploadLog.succesCount">Succes Count</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="erreurCount">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.uploadLog.erreurCount">Erreur Count</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="doublonCount">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.uploadLog.doublonCount">Doublon Count</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="entite">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.uploadLog.entite">Entite</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (uploadLog of uploadLogs(); track trackId(uploadLog)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/upload-log', uploadLog.id, 'view']">{{ uploadLog.id }}</a>
+              </td>
+              <td [jhiTranslate]="'smoConnectFrontendApp.TypeFichier.' + (uploadLog.typeFichier ?? 'null')">
+                {{ { null: '', EFFECTIF: 'EFFECTIF', DEPART: 'DEPART', DEPART_MANUEL: 'DEPART_MANUEL' }[uploadLog.typeFichier ?? 'null'] }}
+              </td>
+              <td>{{ uploadLog.nomFichier }}</td>
+              <td>{{ uploadLog.nombreLignes }}</td>
+              <td>{{ uploadLog.succesCount }}</td>
+              <td>{{ uploadLog.erreurCount }}</td>
+              <td>{{ uploadLog.doublonCount }}</td>
+              <td>{{ uploadLog.entite }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/upload-log', uploadLog.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/upload-log', uploadLog.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(uploadLog)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (uploadLogs().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

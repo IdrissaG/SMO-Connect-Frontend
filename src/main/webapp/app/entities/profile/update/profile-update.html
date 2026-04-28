@@ -1,0 +1,126 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-profile-heading" data-cy="ProfileCreateUpdateHeading" jhiTranslate="smoConnectFrontendApp.profile.home.createOrEditLabel">
+        Créer ou éditer un Profile
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let typeUtilisateurRef = editForm.get('typeUtilisateur')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_typeUtilisateur" jhiTranslate="smoConnectFrontendApp.profile.typeUtilisateur"
+            >Type Utilisateur</label
+          >
+          <select
+            class="form-control"
+            name="typeUtilisateur"
+            formControlName="typeUtilisateur"
+            id="field_typeUtilisateur"
+            data-cy="typeUtilisateur"
+          >
+            <option [ngValue]="null">{{ 'smoConnectFrontendApp.TypeUtilisateur.null' | translate }}</option>
+            @for (typeUtilisateur of typeUtilisateurValues; track $index) {
+              <option [value]="typeUtilisateur">{{ 'smoConnectFrontendApp.TypeUtilisateur.' + typeUtilisateur | translate }}</option>
+            }
+          </select>
+          @if (typeUtilisateurRef.invalid && (typeUtilisateurRef.dirty || typeUtilisateurRef.touched)) {
+            <div>
+              @if (editForm.get('typeUtilisateur')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let matriculeRef = editForm.get('matricule')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_matricule" jhiTranslate="smoConnectFrontendApp.profile.matricule">Matricule</label>
+          <input type="text" class="form-control" name="matricule" id="field_matricule" data-cy="matricule" formControlName="matricule" />
+          @if (matriculeRef.invalid && (matriculeRef.dirty || matriculeRef.touched)) {
+            <div>
+              @if (editForm.get('matricule')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >Ce champ doit faire au maximum 50 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let structureRef = editForm.get('structure')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_structure" jhiTranslate="smoConnectFrontendApp.profile.structure">Structure</label>
+          <input type="text" class="form-control" name="structure" id="field_structure" data-cy="structure" formControlName="structure" />
+          @if (structureRef.invalid && (structureRef.dirty || structureRef.touched)) {
+            <div>
+              @if (editForm.get('structure')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_prestataire" jhiTranslate="smoConnectFrontendApp.profile.prestataire">Prestataire</label>
+          <select
+            class="form-control"
+            id="field_prestataire"
+            data-cy="prestataire"
+            name="prestataire"
+            formControlName="prestataire"
+            [compareWith]="comparePrestataire"
+          >
+            <option [ngValue]="null"></option>
+            @for (prestataireOption of prestatairesSharedCollection(); track $index) {
+              <option [ngValue]="prestataireOption">{{ prestataireOption.nom }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_plateau" jhiTranslate="smoConnectFrontendApp.profile.plateau">Plateau</label>
+          <select
+            class="form-control"
+            id="field_plateau"
+            data-cy="plateau"
+            name="plateau"
+            formControlName="plateau"
+            [compareWith]="comparePlateau"
+          >
+            <option [ngValue]="null"></option>
+            @for (plateauOption of plateausSharedCollection(); track $index) {
+              <option [ngValue]="plateauOption">{{ plateauOption.nom }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,406 @@
+<div>
+  <h2 id="page-heading" data-cy="EffectifHeading">
+    <span jhiTranslate="smoConnectFrontendApp.effectif.home.title">Effectifs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="smoConnectFrontendApp.effectif.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-effectif"
+        [routerLink]="['/effectif/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="smoConnectFrontendApp.effectif.home.createLabel">Créer un nouveau Effectif</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (effectifs().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="smoConnectFrontendApp.effectif.home.notFound">Aucun Effectif trouvé</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nom">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.nom">Nom</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prenom">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.prenom">Prenom</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="mobile">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.mobile">Mobile</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cni">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.cni">Cni</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="genre">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.genre">Genre</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="matricule">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.matricule">Matricule</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="matriculeNPlus1">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.matriculeNPlus1">Matricule N Plus 1</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cuid">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.cuid">Cuid</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="loginReferenceSelfservice">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.loginReferenceSelfservice">Login Reference Selfservice</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="typeContrat">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.typeContrat">Type Contrat</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="typeCompte">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.typeCompte">Type Compte</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fonction">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.fonction">Fonction</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="profil">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.profil">Profil</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="departement">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.departement">Departement</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="siteProduction">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.siteProduction">Site Production</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="vague">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.vague">Vague</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateRemontee">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.dateRemontee">Date Remontee</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateDemarrageFormation">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.dateDemarrageFormation">Date Demarrage Formation</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateEntreeProd">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.dateEntreeProd">Date Entree Prod</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateSortie">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.dateSortie">Date Sortie</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateReintegration">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.dateReintegration">Date Reintegration</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="actif">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.actif">Actif</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nouveauAgent">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.nouveauAgent">Nouveau Agent</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="envoyeTidjiCreation">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiCreation">Envoye Tidji Creation</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateEnvoyeTidjiCreation">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.dateEnvoyeTidjiCreation">Date Envoye Tidji Creation</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="envoyeTidjiReset">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiReset">Envoye Tidji Reset</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="envoyeTidjiReactivation">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiReactivation">Envoye Tidji Reactivation</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateEnvoyeTidjiReactivation">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.dateEnvoyeTidjiReactivation">Date Envoye Tidji Reactivation</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="envoyeTidjiModification">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiModification">Envoye Tidji Modification</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateEnvoyeTidjiModification">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.dateEnvoyeTidjiModification">Date Envoye Tidji Modification</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prestataire.nom">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.prestataire">Prestataire</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="plateau.nom">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.effectif.plateau">Plateau</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (effectif of effectifs(); track trackId(effectif)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/effectif', effectif.id, 'view']">{{ effectif.id }}</a>
+              </td>
+              <td>{{ effectif.nom }}</td>
+              <td>{{ effectif.prenom }}</td>
+              <td>{{ effectif.email }}</td>
+              <td>{{ effectif.mobile }}</td>
+              <td>{{ effectif.cni }}</td>
+              <td [jhiTranslate]="'smoConnectFrontendApp.Genre.' + (effectif.genre ?? 'null')">
+                {{ { null: '', M: 'M', F: 'F' }[effectif.genre ?? 'null'] }}
+              </td>
+              <td>{{ effectif.matricule }}</td>
+              <td>{{ effectif.matriculeNPlus1 }}</td>
+              <td>{{ effectif.cuid }}</td>
+              <td>{{ effectif.loginReferenceSelfservice }}</td>
+              <td [jhiTranslate]="'smoConnectFrontendApp.TypeContrat.' + (effectif.typeContrat ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    CDI: 'CDI',
+                    CDD: 'CDD',
+                    STAGE: 'STAGE',
+                    FREELANCE: 'FREELANCE',
+                    CONSULTANT: 'CONSULTANT',
+                    PRESTATAIRE: 'PRESTATAIRE',
+                    INTERIMAIRE: 'INTERIMAIRE',
+                    AUTRE: 'AUTRE',
+                  }[effectif.typeContrat ?? 'null']
+                }}
+              </td>
+              <td [jhiTranslate]="'smoConnectFrontendApp.TypeCompte.' + (effectif.typeCompte ?? 'null')">
+                {{ { null: '', INTERNE: 'INTERNE', EXTERNE: 'EXTERNE' }[effectif.typeCompte ?? 'null'] }}
+              </td>
+              <td [jhiTranslate]="'smoConnectFrontendApp.Fonction.' + (effectif.fonction ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    FM_OPS: 'FM_OPS',
+                    CSO: 'CSO',
+                    RESPONSABLE_DE_COMPTE: 'RESPONSABLE_DE_COMPTE',
+                    AUDITEUR: 'AUDITEUR',
+                    RTM: 'RTM',
+                    REPORTING: 'REPORTING',
+                    MANAGER_COPC: 'MANAGER_COPC',
+                    PERFORMANCE_MANAGER: 'PERFORMANCE_MANAGER',
+                    FORMATEUR: 'FORMATEUR',
+                    CC: 'CC',
+                    CC_REFERENT: 'CC_REFERENT',
+                    BUA: 'BUA',
+                    CC_DEPORTE: 'CC_DEPORTE',
+                  }[effectif.fonction ?? 'null']
+                }}
+              </td>
+              <td>{{ effectif.profil }}</td>
+              <td>{{ effectif.departement }}</td>
+              <td>{{ effectif.siteProduction }}</td>
+              <td>{{ effectif.vague }}</td>
+              <td>{{ effectif.dateRemontee | formatMediumDate }}</td>
+              <td>{{ effectif.dateDemarrageFormation | formatMediumDate }}</td>
+              <td>{{ effectif.dateEntreeProd | formatMediumDate }}</td>
+              <td>{{ effectif.dateSortie | formatMediumDate }}</td>
+              <td>{{ effectif.dateReintegration | formatMediumDate }}</td>
+              <td>{{ effectif.actif }}</td>
+              <td>{{ effectif.nouveauAgent }}</td>
+              <td>{{ effectif.envoyeTidjiCreation }}</td>
+              <td>{{ effectif.dateEnvoyeTidjiCreation | formatMediumDatetime }}</td>
+              <td>{{ effectif.envoyeTidjiReset }}</td>
+              <td>{{ effectif.envoyeTidjiReactivation }}</td>
+              <td>{{ effectif.dateEnvoyeTidjiReactivation | formatMediumDatetime }}</td>
+              <td>{{ effectif.envoyeTidjiModification }}</td>
+              <td>{{ effectif.dateEnvoyeTidjiModification | formatMediumDatetime }}</td>
+              <td>
+                @if (effectif.prestataire) {
+                  <div>
+                    <a [routerLink]="['/prestataire', effectif.prestataire.id, 'view']">{{ effectif.prestataire.nom }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (effectif.plateau) {
+                  <div>
+                    <a [routerLink]="['/plateau', effectif.plateau.id, 'view']">{{ effectif.plateau.nom }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/effectif', effectif.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/effectif', effectif.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(effectif)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (effectifs().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page(), totalItems: totalItems(), itemsPerPage: itemsPerPage() }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="itemsPerPage()"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        />
+      </div>
+    </div>
+  }
+</div>

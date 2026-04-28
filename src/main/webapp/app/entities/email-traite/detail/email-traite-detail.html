@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (emailTraite(); as emailTraiteRef) {
+      <div>
+        <h2 data-cy="emailTraiteDetailsHeading"><span jhiTranslate="smoConnectFrontendApp.emailTraite.detail.title">Email Traite</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ emailTraiteRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.emailTraite.messageId">Message Id</span></dt>
+          <dd>
+            <span>{{ emailTraiteRef.messageId }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.emailTraite.dateReception">Date Reception</span></dt>
+          <dd>
+            <span>{{ emailTraiteRef.dateReception | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.emailTraite.nomExtrait">Nom Extrait</span></dt>
+          <dd>
+            <span>{{ emailTraiteRef.nomExtrait }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.emailTraite.prenomExtrait">Prenom Extrait</span></dt>
+          <dd>
+            <span>{{ emailTraiteRef.prenomExtrait }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.emailTraite.applicationExtrait">Application Extrait</span></dt>
+          <dd>
+            <span>{{ emailTraiteRef.applicationExtrait }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.emailTraite.loginExtrait">Login Extrait</span></dt>
+          <dd>
+            <span>{{ emailTraiteRef.loginExtrait }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.emailTraite.traiteAvecSucces">Traite Avec Succes</span></dt>
+          <dd>
+            <span>{{ emailTraiteRef.traiteAvecSucces }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.emailTraite.erreur">Erreur</span></dt>
+          <dd>
+            <span>{{ emailTraiteRef.erreur }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.emailTraite.effectif">Effectif</span></dt>
+          <dd>
+            @if (emailTraite()!.effectif) {
+              <div>
+                <a [routerLink]="['/effectif', emailTraite()!.effectif?.id, 'view']">{{ emailTraiteRef.effectif?.nom }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.emailTraite.resetPassword">Reset Password</span></dt>
+          <dd>
+            @if (emailTraite()!.resetPassword) {
+              <div>
+                <a [routerLink]="['/reset-password', emailTraite()!.resetPassword?.id, 'view']">{{ emailTraiteRef.resetPassword?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/email-traite', emailTraiteRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

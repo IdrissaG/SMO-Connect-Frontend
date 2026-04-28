@@ -1,0 +1,215 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165511"
+  },
+  "applications": ["*"],
+  "documentation": "Effectif - Agent/employé géré dans le système",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "254"
+    },
+    {
+      "fieldName": "mobile",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "cni",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "genre",
+      "fieldType": "Genre",
+      "fieldValues": "M,F"
+    },
+    {
+      "fieldName": "matricule",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "matriculeNPlus1",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "cuid",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "loginReferenceSelfservice",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "typeContrat",
+      "fieldType": "TypeContrat",
+      "fieldValues": "CDI,CDD,STAGE,FREELANCE,CONSULTANT,PRESTATAIRE,INTERIMAIRE,AUTRE"
+    },
+    {
+      "fieldName": "typeCompte",
+      "fieldType": "TypeCompte",
+      "fieldValues": "INTERNE,EXTERNE"
+    },
+    {
+      "fieldName": "fonction",
+      "fieldType": "Fonction",
+      "fieldValues": "FM_OPS,CSO,RESPONSABLE_DE_COMPTE,AUDITEUR,RTM,REPORTING,MANAGER_COPC,PERFORMANCE_MANAGER,FORMATEUR,CC,CC_REFERENT,BUA,CC_DEPORTE"
+    },
+    {
+      "fieldName": "profil",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "departement",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "siteProduction",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "vague",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "dateRemontee",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateDemarrageFormation",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateEntreeProd",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateSortie",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateReintegration",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "actif",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nouveauAgent",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "envoyeTidjiCreation",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "dateEnvoyeTidjiCreation",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "envoyeTidjiReset",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "envoyeTidjiReactivation",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "dateEnvoyeTidjiReactivation",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "envoyeTidjiModification",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "dateEnvoyeTidjiModification",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Effectif",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "prestataire",
+      "otherEntityRelationshipName": "effectifs",
+      "relationshipName": "prestataire",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "plateau",
+      "otherEntityRelationshipName": "effectifs",
+      "relationshipName": "plateau",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "depart",
+      "otherEntityRelationshipName": "effectif",
+      "relationshipName": "departs",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "conge",
+      "otherEntityRelationshipName": "effectif",
+      "relationshipName": "conges",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "resetPassword",
+      "otherEntityRelationshipName": "effectif",
+      "relationshipName": "resetPasswords",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "emailTraite",
+      "otherEntityRelationshipName": "effectif",
+      "relationshipName": "emailsTraites",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

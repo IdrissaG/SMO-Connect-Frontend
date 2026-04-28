@@ -1,0 +1,18 @@
+{
+  "smoConnectFrontendApp": {
+    "MotifDepart": {
+      "null": "",
+      "DEMISSION": "DEMISSION",
+      "LICENCIEMENT": "LICENCIEMENT",
+      "FIN_DE_CONTRAT": "FIN_DE_CONTRAT",
+      "RETRAITE": "RETRAITE",
+      "ABANDON_DE_POSTE": "ABANDON_DE_POSTE",
+      "RUPTURE_CONVENTIONNELLE": "RUPTURE_CONVENTIONNELLE",
+      "DEPART_VOLONTAIRE": "DEPART_VOLONTAIRE",
+      "MUTATION": "MUTATION",
+      "INAPTITUDE_MEDICALE": "INAPTITUDE_MEDICALE",
+      "DECES": "DECES",
+      "AUTRE": "AUTRE"
+    }
+  }
+}

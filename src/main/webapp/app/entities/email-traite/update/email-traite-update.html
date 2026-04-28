@@ -1,0 +1,246 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-email-traite-heading"
+        data-cy="EmailTraiteCreateUpdateHeading"
+        jhiTranslate="smoConnectFrontendApp.emailTraite.home.createOrEditLabel"
+      >
+        Créer ou éditer un Email Traite
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let messageIdRef = editForm.get('messageId')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_messageId" jhiTranslate="smoConnectFrontendApp.emailTraite.messageId">Message Id</label>
+          <input type="text" class="form-control" name="messageId" id="field_messageId" data-cy="messageId" formControlName="messageId" />
+          @if (messageIdRef.invalid && (messageIdRef.dirty || messageIdRef.touched)) {
+            <div>
+              @if (editForm.get('messageId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+              @if (editForm.get('messageId')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '500' }"
+                  >Ce champ doit faire au maximum 500 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let dateReceptionRef = editForm.get('dateReception')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dateReception" jhiTranslate="smoConnectFrontendApp.emailTraite.dateReception"
+            >Date Reception</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateReception"
+              data-cy="dateReception"
+              type="datetime-local"
+              class="form-control"
+              name="dateReception"
+              formControlName="dateReception"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (dateReceptionRef.invalid && (dateReceptionRef.dirty || dateReceptionRef.touched)) {
+            <div>
+              @if (editForm.get('dateReception')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('dateReception')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >Ce champ doit être une date et une heure.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let nomExtraitRef = editForm.get('nomExtrait')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_nomExtrait" jhiTranslate="smoConnectFrontendApp.emailTraite.nomExtrait">Nom Extrait</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomExtrait"
+            id="field_nomExtrait"
+            data-cy="nomExtrait"
+            formControlName="nomExtrait"
+          />
+          @if (nomExtraitRef.invalid && (nomExtraitRef.dirty || nomExtraitRef.touched)) {
+            <div>
+              @if (editForm.get('nomExtrait')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let prenomExtraitRef = editForm.get('prenomExtrait')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_prenomExtrait" jhiTranslate="smoConnectFrontendApp.emailTraite.prenomExtrait"
+            >Prenom Extrait</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="prenomExtrait"
+            id="field_prenomExtrait"
+            data-cy="prenomExtrait"
+            formControlName="prenomExtrait"
+          />
+          @if (prenomExtraitRef.invalid && (prenomExtraitRef.dirty || prenomExtraitRef.touched)) {
+            <div>
+              @if (editForm.get('prenomExtrait')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let applicationExtraitRef = editForm.get('applicationExtrait')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_applicationExtrait" jhiTranslate="smoConnectFrontendApp.emailTraite.applicationExtrait"
+            >Application Extrait</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="applicationExtrait"
+            id="field_applicationExtrait"
+            data-cy="applicationExtrait"
+            formControlName="applicationExtrait"
+          />
+          @if (applicationExtraitRef.invalid && (applicationExtraitRef.dirty || applicationExtraitRef.touched)) {
+            <div>
+              @if (editForm.get('applicationExtrait')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >Ce champ doit faire au maximum 100 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let loginExtraitRef = editForm.get('loginExtrait')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_loginExtrait" jhiTranslate="smoConnectFrontendApp.emailTraite.loginExtrait"
+            >Login Extrait</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="loginExtrait"
+            id="field_loginExtrait"
+            data-cy="loginExtrait"
+            formControlName="loginExtrait"
+          />
+          @if (loginExtraitRef.invalid && (loginExtraitRef.dirty || loginExtraitRef.touched)) {
+            <div>
+              @if (editForm.get('loginExtrait')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let traiteAvecSuccesRef = editForm.get('traiteAvecSucces')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_traiteAvecSucces" jhiTranslate="smoConnectFrontendApp.emailTraite.traiteAvecSucces"
+            >Traite Avec Succes</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="traiteAvecSucces"
+            id="field_traiteAvecSucces"
+            data-cy="traiteAvecSucces"
+            formControlName="traiteAvecSucces"
+          />
+          @if (traiteAvecSuccesRef.invalid && (traiteAvecSuccesRef.dirty || traiteAvecSuccesRef.touched)) {
+            <div>
+              @if (editForm.get('traiteAvecSucces')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_erreur" jhiTranslate="smoConnectFrontendApp.emailTraite.erreur">Erreur</label>
+          <textarea class="form-control" name="erreur" id="field_erreur" data-cy="erreur" formControlName="erreur"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_effectif" jhiTranslate="smoConnectFrontendApp.emailTraite.effectif">Effectif</label>
+          <select
+            class="form-control"
+            id="field_effectif"
+            data-cy="effectif"
+            name="effectif"
+            formControlName="effectif"
+            [compareWith]="compareEffectif"
+          >
+            <option [ngValue]="null"></option>
+            @for (effectifOption of effectifsSharedCollection(); track $index) {
+              <option [ngValue]="effectifOption">{{ effectifOption.nom }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_resetPassword" jhiTranslate="smoConnectFrontendApp.emailTraite.resetPassword"
+            >Reset Password</label
+          >
+          <select
+            class="form-control"
+            id="field_resetPassword"
+            data-cy="resetPassword"
+            name="resetPassword"
+            formControlName="resetPassword"
+            [compareWith]="compareResetPassword"
+          >
+            <option [ngValue]="null"></option>
+            @for (resetPasswordOption of resetPasswordsSharedCollection(); track $index) {
+              <option [ngValue]="resetPasswordOption">{{ resetPasswordOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165515"
+  },
+  "applications": ["*"],
+  "documentation": "Demande - Demande générique (accès, modification, etc.)",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "TypeDemande",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CREATION,MODIFICATION,REACTIVATION,RESET"
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "EtatDemande",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EN_ATTENTE,APPROUVEE,REJETEE,CLOTUREE"
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateCloture",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "typeSla",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "name": "Demande",
+  "pagination": "pagination",
+  "relationships": [],
+  "service": "serviceClass"
+}

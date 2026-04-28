@@ -1,0 +1,36 @@
+{
+  "smoConnectFrontendApp": {
+    "blacklist": {
+      "home": {
+        "title": "Blacklists",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Blacklist",
+        "createOrEditLabel": "Create or edit a Blacklist",
+        "notFound": "No Blacklists found"
+      },
+      "created": "A new Blacklist is created with identifier {{ param }}",
+      "updated": "A Blacklist is updated with identifier {{ param }}",
+      "deleted": "A Blacklist is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Blacklist {{ id }}?"
+      },
+      "detail": {
+        "title": "Blacklist"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "mobile": "Mobile",
+      "cni": "Cni",
+      "email": "Email",
+      "faute": "Faute",
+      "commentaire": "Commentaire",
+      "dateFaits": "Date Faits",
+      "dateDetection": "Date Detection",
+      "dateRemontee": "Date Remontee",
+      "active": "Active",
+      "prestataire": "Prestataire",
+      "plateau": "Plateau"
+    }
+  }
+}

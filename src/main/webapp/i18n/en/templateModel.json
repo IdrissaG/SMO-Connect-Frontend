@@ -1,0 +1,26 @@
+{
+  "smoConnectFrontendApp": {
+    "templateModel": {
+      "home": {
+        "title": "Template Models",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Template Model",
+        "createOrEditLabel": "Create or edit a Template Model",
+        "notFound": "No Template Models found"
+      },
+      "created": "A new Template Model is created with identifier {{ param }}",
+      "updated": "A Template Model is updated with identifier {{ param }}",
+      "deleted": "A Template Model is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Template Model {{ id }}?"
+      },
+      "detail": {
+        "title": "Template Model"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "fichier": "Fichier",
+      "actif": "Actif"
+    }
+  }
+}

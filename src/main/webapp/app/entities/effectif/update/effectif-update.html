@@ -1,0 +1,602 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-effectif-heading"
+        data-cy="EffectifCreateUpdateHeading"
+        jhiTranslate="smoConnectFrontendApp.effectif.home.createOrEditLabel"
+      >
+        Créer ou éditer un Effectif
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nomRef = editForm.get('nom')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_nom" jhiTranslate="smoConnectFrontendApp.effectif.nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          @if (nomRef.invalid && (nomRef.dirty || nomRef.touched)) {
+            <div>
+              @if (editForm.get('nom')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+              @if (editForm.get('nom')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let prenomRef = editForm.get('prenom')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_prenom" jhiTranslate="smoConnectFrontendApp.effectif.prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+          @if (prenomRef.invalid && (prenomRef.dirty || prenomRef.touched)) {
+            <div>
+              @if (editForm.get('prenom')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let emailRef = editForm.get('email')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_email" jhiTranslate="smoConnectFrontendApp.effectif.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (emailRef.invalid && (emailRef.dirty || emailRef.touched)) {
+            <div>
+              @if (editForm.get('email')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '254' }"
+                  >Ce champ doit faire au maximum 254 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let mobileRef = editForm.get('mobile')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_mobile" jhiTranslate="smoConnectFrontendApp.effectif.mobile">Mobile</label>
+          <input type="text" class="form-control" name="mobile" id="field_mobile" data-cy="mobile" formControlName="mobile" />
+          @if (mobileRef.invalid && (mobileRef.dirty || mobileRef.touched)) {
+            <div>
+              @if (editForm.get('mobile')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >Ce champ doit faire au maximum 50 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let cniRef = editForm.get('cni')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_cni" jhiTranslate="smoConnectFrontendApp.effectif.cni">Cni</label>
+          <input type="text" class="form-control" name="cni" id="field_cni" data-cy="cni" formControlName="cni" />
+          @if (cniRef.invalid && (cniRef.dirty || cniRef.touched)) {
+            <div>
+              @if (editForm.get('cni')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_genre" jhiTranslate="smoConnectFrontendApp.effectif.genre">Genre</label>
+          <select class="form-control" name="genre" formControlName="genre" id="field_genre" data-cy="genre">
+            <option [ngValue]="null">{{ 'smoConnectFrontendApp.Genre.null' | translate }}</option>
+            @for (genre of genreValues; track $index) {
+              <option [value]="genre">{{ 'smoConnectFrontendApp.Genre.' + genre | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @let matriculeRef = editForm.get('matricule')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_matricule" jhiTranslate="smoConnectFrontendApp.effectif.matricule">Matricule</label>
+          <input type="text" class="form-control" name="matricule" id="field_matricule" data-cy="matricule" formControlName="matricule" />
+          @if (matriculeRef.invalid && (matriculeRef.dirty || matriculeRef.touched)) {
+            <div>
+              @if (editForm.get('matricule')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >Ce champ doit faire au maximum 100 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let matriculeNPlus1Ref = editForm.get('matriculeNPlus1')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_matriculeNPlus1" jhiTranslate="smoConnectFrontendApp.effectif.matriculeNPlus1"
+            >Matricule N Plus 1</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="matriculeNPlus1"
+            id="field_matriculeNPlus1"
+            data-cy="matriculeNPlus1"
+            formControlName="matriculeNPlus1"
+          />
+          @if (matriculeNPlus1Ref.invalid && (matriculeNPlus1Ref.dirty || matriculeNPlus1Ref.touched)) {
+            <div>
+              @if (editForm.get('matriculeNPlus1')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >Ce champ doit faire au maximum 100 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let cuidRef = editForm.get('cuid')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_cuid" jhiTranslate="smoConnectFrontendApp.effectif.cuid">Cuid</label>
+          <input type="text" class="form-control" name="cuid" id="field_cuid" data-cy="cuid" formControlName="cuid" />
+          @if (cuidRef.invalid && (cuidRef.dirty || cuidRef.touched)) {
+            <div>
+              @if (editForm.get('cuid')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let loginReferenceSelfserviceRef = editForm.get('loginReferenceSelfservice')!;
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_loginReferenceSelfservice"
+            jhiTranslate="smoConnectFrontendApp.effectif.loginReferenceSelfservice"
+            >Login Reference Selfservice</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="loginReferenceSelfservice"
+            id="field_loginReferenceSelfservice"
+            data-cy="loginReferenceSelfservice"
+            formControlName="loginReferenceSelfservice"
+          />
+          @if (loginReferenceSelfserviceRef.invalid && (loginReferenceSelfserviceRef.dirty || loginReferenceSelfserviceRef.touched)) {
+            <div>
+              @if (editForm.get('loginReferenceSelfservice')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >Ce champ doit faire au maximum 100 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_typeContrat" jhiTranslate="smoConnectFrontendApp.effectif.typeContrat">Type Contrat</label>
+          <select class="form-control" name="typeContrat" formControlName="typeContrat" id="field_typeContrat" data-cy="typeContrat">
+            <option [ngValue]="null">{{ 'smoConnectFrontendApp.TypeContrat.null' | translate }}</option>
+            @for (typeContrat of typeContratValues; track $index) {
+              <option [value]="typeContrat">{{ 'smoConnectFrontendApp.TypeContrat.' + typeContrat | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_typeCompte" jhiTranslate="smoConnectFrontendApp.effectif.typeCompte">Type Compte</label>
+          <select class="form-control" name="typeCompte" formControlName="typeCompte" id="field_typeCompte" data-cy="typeCompte">
+            <option [ngValue]="null">{{ 'smoConnectFrontendApp.TypeCompte.null' | translate }}</option>
+            @for (typeCompte of typeCompteValues; track $index) {
+              <option [value]="typeCompte">{{ 'smoConnectFrontendApp.TypeCompte.' + typeCompte | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fonction" jhiTranslate="smoConnectFrontendApp.effectif.fonction">Fonction</label>
+          <select class="form-control" name="fonction" formControlName="fonction" id="field_fonction" data-cy="fonction">
+            <option [ngValue]="null">{{ 'smoConnectFrontendApp.Fonction.null' | translate }}</option>
+            @for (fonction of fonctionValues; track $index) {
+              <option [value]="fonction">{{ 'smoConnectFrontendApp.Fonction.' + fonction | translate }}</option>
+            }
+          </select>
+        </div>
+
+        @let profilRef = editForm.get('profil')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_profil" jhiTranslate="smoConnectFrontendApp.effectif.profil">Profil</label>
+          <input type="text" class="form-control" name="profil" id="field_profil" data-cy="profil" formControlName="profil" />
+          @if (profilRef.invalid && (profilRef.dirty || profilRef.touched)) {
+            <div>
+              @if (editForm.get('profil')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let departementRef = editForm.get('departement')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_departement" jhiTranslate="smoConnectFrontendApp.effectif.departement">Departement</label>
+          <input
+            type="text"
+            class="form-control"
+            name="departement"
+            id="field_departement"
+            data-cy="departement"
+            formControlName="departement"
+          />
+          @if (departementRef.invalid && (departementRef.dirty || departementRef.touched)) {
+            <div>
+              @if (editForm.get('departement')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let siteProductionRef = editForm.get('siteProduction')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_siteProduction" jhiTranslate="smoConnectFrontendApp.effectif.siteProduction"
+            >Site Production</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="siteProduction"
+            id="field_siteProduction"
+            data-cy="siteProduction"
+            formControlName="siteProduction"
+          />
+          @if (siteProductionRef.invalid && (siteProductionRef.dirty || siteProductionRef.touched)) {
+            <div>
+              @if (editForm.get('siteProduction')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let vagueRef = editForm.get('vague')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_vague" jhiTranslate="smoConnectFrontendApp.effectif.vague">Vague</label>
+          <input type="text" class="form-control" name="vague" id="field_vague" data-cy="vague" formControlName="vague" />
+          @if (vagueRef.invalid && (vagueRef.dirty || vagueRef.touched)) {
+            <div>
+              @if (editForm.get('vague')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateRemontee" jhiTranslate="smoConnectFrontendApp.effectif.dateRemontee"
+            >Date Remontee</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateRemontee"
+              data-cy="dateRemontee"
+              type="text"
+              class="form-control"
+              name="dateRemontee"
+              ngbDatepicker
+              #dateRemonteeDp="ngbDatepicker"
+              formControlName="dateRemontee"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateRemonteeDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDemarrageFormation" jhiTranslate="smoConnectFrontendApp.effectif.dateDemarrageFormation"
+            >Date Demarrage Formation</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateDemarrageFormation"
+              data-cy="dateDemarrageFormation"
+              type="text"
+              class="form-control"
+              name="dateDemarrageFormation"
+              ngbDatepicker
+              #dateDemarrageFormationDp="ngbDatepicker"
+              formControlName="dateDemarrageFormation"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDemarrageFormationDp.toggle()">
+              <fa-icon icon="calendar-alt" />
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateEntreeProd" jhiTranslate="smoConnectFrontendApp.effectif.dateEntreeProd"
+            >Date Entree Prod</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateEntreeProd"
+              data-cy="dateEntreeProd"
+              type="text"
+              class="form-control"
+              name="dateEntreeProd"
+              ngbDatepicker
+              #dateEntreeProdDp="ngbDatepicker"
+              formControlName="dateEntreeProd"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateEntreeProdDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateSortie" jhiTranslate="smoConnectFrontendApp.effectif.dateSortie">Date Sortie</label>
+          <div class="input-group">
+            <input
+              id="field_dateSortie"
+              data-cy="dateSortie"
+              type="text"
+              class="form-control"
+              name="dateSortie"
+              ngbDatepicker
+              #dateSortieDp="ngbDatepicker"
+              formControlName="dateSortie"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateSortieDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateReintegration" jhiTranslate="smoConnectFrontendApp.effectif.dateReintegration"
+            >Date Reintegration</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateReintegration"
+              data-cy="dateReintegration"
+              type="text"
+              class="form-control"
+              name="dateReintegration"
+              ngbDatepicker
+              #dateReintegrationDp="ngbDatepicker"
+              formControlName="dateReintegration"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateReintegrationDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+        </div>
+
+        @let actifRef = editForm.get('actif')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_actif" jhiTranslate="smoConnectFrontendApp.effectif.actif">Actif</label>
+          <input type="checkbox" class="form-check" name="actif" id="field_actif" data-cy="actif" formControlName="actif" />
+          @if (actifRef.invalid && (actifRef.dirty || actifRef.touched)) {
+            <div>
+              @if (editForm.get('actif')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nouveauAgent" jhiTranslate="smoConnectFrontendApp.effectif.nouveauAgent"
+            >Nouveau Agent</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="nouveauAgent"
+            id="field_nouveauAgent"
+            data-cy="nouveauAgent"
+            formControlName="nouveauAgent"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_envoyeTidjiCreation" jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiCreation"
+            >Envoye Tidji Creation</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="envoyeTidjiCreation"
+            id="field_envoyeTidjiCreation"
+            data-cy="envoyeTidjiCreation"
+            formControlName="envoyeTidjiCreation"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_dateEnvoyeTidjiCreation"
+            jhiTranslate="smoConnectFrontendApp.effectif.dateEnvoyeTidjiCreation"
+            >Date Envoye Tidji Creation</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateEnvoyeTidjiCreation"
+              data-cy="dateEnvoyeTidjiCreation"
+              type="datetime-local"
+              class="form-control"
+              name="dateEnvoyeTidjiCreation"
+              formControlName="dateEnvoyeTidjiCreation"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_envoyeTidjiReset" jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiReset"
+            >Envoye Tidji Reset</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="envoyeTidjiReset"
+            id="field_envoyeTidjiReset"
+            data-cy="envoyeTidjiReset"
+            formControlName="envoyeTidjiReset"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_envoyeTidjiReactivation"
+            jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiReactivation"
+            >Envoye Tidji Reactivation</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="envoyeTidjiReactivation"
+            id="field_envoyeTidjiReactivation"
+            data-cy="envoyeTidjiReactivation"
+            formControlName="envoyeTidjiReactivation"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_dateEnvoyeTidjiReactivation"
+            jhiTranslate="smoConnectFrontendApp.effectif.dateEnvoyeTidjiReactivation"
+            >Date Envoye Tidji Reactivation</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateEnvoyeTidjiReactivation"
+              data-cy="dateEnvoyeTidjiReactivation"
+              type="datetime-local"
+              class="form-control"
+              name="dateEnvoyeTidjiReactivation"
+              formControlName="dateEnvoyeTidjiReactivation"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_envoyeTidjiModification"
+            jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiModification"
+            >Envoye Tidji Modification</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="envoyeTidjiModification"
+            id="field_envoyeTidjiModification"
+            data-cy="envoyeTidjiModification"
+            formControlName="envoyeTidjiModification"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="field_dateEnvoyeTidjiModification"
+            jhiTranslate="smoConnectFrontendApp.effectif.dateEnvoyeTidjiModification"
+            >Date Envoye Tidji Modification</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateEnvoyeTidjiModification"
+              data-cy="dateEnvoyeTidjiModification"
+              type="datetime-local"
+              class="form-control"
+              name="dateEnvoyeTidjiModification"
+              formControlName="dateEnvoyeTidjiModification"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_prestataire" jhiTranslate="smoConnectFrontendApp.effectif.prestataire">Prestataire</label>
+          <select
+            class="form-control"
+            id="field_prestataire"
+            data-cy="prestataire"
+            name="prestataire"
+            formControlName="prestataire"
+            [compareWith]="comparePrestataire"
+          >
+            @if (editForm.get(['prestataire'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (prestataireOption of prestatairesSharedCollection(); track $index) {
+              <option [ngValue]="prestataireOption">{{ prestataireOption.nom }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['prestataire'])!.invalid && (editForm.get(['prestataire'])!.dirty || editForm.get(['prestataire'])!.touched)) {
+          <div>
+            @if (editForm.get(['prestataire'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_plateau" jhiTranslate="smoConnectFrontendApp.effectif.plateau">Plateau</label>
+          <select
+            class="form-control"
+            id="field_plateau"
+            data-cy="plateau"
+            name="plateau"
+            formControlName="plateau"
+            [compareWith]="comparePlateau"
+          >
+            <option [ngValue]="null"></option>
+            @for (plateauOption of plateausSharedCollection(); track $index) {
+              <option [ngValue]="plateauOption">{{ plateauOption.nom }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

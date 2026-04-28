@@ -1,0 +1,203 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (effectif(); as effectifRef) {
+      <div>
+        <h2 data-cy="effectifDetailsHeading"><span jhiTranslate="smoConnectFrontendApp.effectif.detail.title">Effectif</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ effectifRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.nom">Nom</span></dt>
+          <dd>
+            <span>{{ effectifRef.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.prenom">Prenom</span></dt>
+          <dd>
+            <span>{{ effectifRef.prenom }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.email">Email</span></dt>
+          <dd>
+            <span>{{ effectifRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.mobile">Mobile</span></dt>
+          <dd>
+            <span>{{ effectifRef.mobile }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.cni">Cni</span></dt>
+          <dd>
+            <span>{{ effectifRef.cni }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.genre">Genre</span></dt>
+          <dd>
+            <span [jhiTranslate]="'smoConnectFrontendApp.Genre.' + (effectifRef.genre ?? 'null')">{{
+              { null: '', M: 'M', F: 'F' }[effectifRef.genre ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.matricule">Matricule</span></dt>
+          <dd>
+            <span>{{ effectifRef.matricule }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.matriculeNPlus1">Matricule N Plus 1</span></dt>
+          <dd>
+            <span>{{ effectifRef.matriculeNPlus1 }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.cuid">Cuid</span></dt>
+          <dd>
+            <span>{{ effectifRef.cuid }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.loginReferenceSelfservice">Login Reference Selfservice</span></dt>
+          <dd>
+            <span>{{ effectifRef.loginReferenceSelfservice }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.typeContrat">Type Contrat</span></dt>
+          <dd>
+            <span [jhiTranslate]="'smoConnectFrontendApp.TypeContrat.' + (effectifRef.typeContrat ?? 'null')">{{
+              {
+                null: '',
+                CDI: 'CDI',
+                CDD: 'CDD',
+                STAGE: 'STAGE',
+                FREELANCE: 'FREELANCE',
+                CONSULTANT: 'CONSULTANT',
+                PRESTATAIRE: 'PRESTATAIRE',
+                INTERIMAIRE: 'INTERIMAIRE',
+                AUTRE: 'AUTRE',
+              }[effectifRef.typeContrat ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.typeCompte">Type Compte</span></dt>
+          <dd>
+            <span [jhiTranslate]="'smoConnectFrontendApp.TypeCompte.' + (effectifRef.typeCompte ?? 'null')">{{
+              { null: '', INTERNE: 'INTERNE', EXTERNE: 'EXTERNE' }[effectifRef.typeCompte ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.fonction">Fonction</span></dt>
+          <dd>
+            <span [jhiTranslate]="'smoConnectFrontendApp.Fonction.' + (effectifRef.fonction ?? 'null')">{{
+              {
+                null: '',
+                FM_OPS: 'FM_OPS',
+                CSO: 'CSO',
+                RESPONSABLE_DE_COMPTE: 'RESPONSABLE_DE_COMPTE',
+                AUDITEUR: 'AUDITEUR',
+                RTM: 'RTM',
+                REPORTING: 'REPORTING',
+                MANAGER_COPC: 'MANAGER_COPC',
+                PERFORMANCE_MANAGER: 'PERFORMANCE_MANAGER',
+                FORMATEUR: 'FORMATEUR',
+                CC: 'CC',
+                CC_REFERENT: 'CC_REFERENT',
+                BUA: 'BUA',
+                CC_DEPORTE: 'CC_DEPORTE',
+              }[effectifRef.fonction ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.profil">Profil</span></dt>
+          <dd>
+            <span>{{ effectifRef.profil }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.departement">Departement</span></dt>
+          <dd>
+            <span>{{ effectifRef.departement }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.siteProduction">Site Production</span></dt>
+          <dd>
+            <span>{{ effectifRef.siteProduction }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.vague">Vague</span></dt>
+          <dd>
+            <span>{{ effectifRef.vague }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.dateRemontee">Date Remontee</span></dt>
+          <dd>
+            <span>{{ effectifRef.dateRemontee | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.dateDemarrageFormation">Date Demarrage Formation</span></dt>
+          <dd>
+            <span>{{ effectifRef.dateDemarrageFormation | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.dateEntreeProd">Date Entree Prod</span></dt>
+          <dd>
+            <span>{{ effectifRef.dateEntreeProd | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.dateSortie">Date Sortie</span></dt>
+          <dd>
+            <span>{{ effectifRef.dateSortie | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.dateReintegration">Date Reintegration</span></dt>
+          <dd>
+            <span>{{ effectifRef.dateReintegration | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.actif">Actif</span></dt>
+          <dd>
+            <span>{{ effectifRef.actif }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.nouveauAgent">Nouveau Agent</span></dt>
+          <dd>
+            <span>{{ effectifRef.nouveauAgent }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiCreation">Envoye Tidji Creation</span></dt>
+          <dd>
+            <span>{{ effectifRef.envoyeTidjiCreation }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.dateEnvoyeTidjiCreation">Date Envoye Tidji Creation</span></dt>
+          <dd>
+            <span>{{ effectifRef.dateEnvoyeTidjiCreation | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiReset">Envoye Tidji Reset</span></dt>
+          <dd>
+            <span>{{ effectifRef.envoyeTidjiReset }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiReactivation">Envoye Tidji Reactivation</span></dt>
+          <dd>
+            <span>{{ effectifRef.envoyeTidjiReactivation }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.dateEnvoyeTidjiReactivation">Date Envoye Tidji Reactivation</span></dt>
+          <dd>
+            <span>{{ effectifRef.dateEnvoyeTidjiReactivation | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.envoyeTidjiModification">Envoye Tidji Modification</span></dt>
+          <dd>
+            <span>{{ effectifRef.envoyeTidjiModification }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.dateEnvoyeTidjiModification">Date Envoye Tidji Modification</span></dt>
+          <dd>
+            <span>{{ effectifRef.dateEnvoyeTidjiModification | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.prestataire">Prestataire</span></dt>
+          <dd>
+            @if (effectif()!.prestataire) {
+              <div>
+                <a [routerLink]="['/prestataire', effectif()!.prestataire?.id, 'view']">{{ effectifRef.prestataire?.nom }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.effectif.plateau">Plateau</span></dt>
+          <dd>
+            @if (effectif()!.plateau) {
+              <div>
+                <a [routerLink]="['/plateau', effectif()!.plateau?.id, 'view']">{{ effectifRef.plateau?.nom }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/effectif', effectifRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

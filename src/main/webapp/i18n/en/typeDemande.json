@@ -1,0 +1,11 @@
+{
+  "smoConnectFrontendApp": {
+    "TypeDemande": {
+      "null": "",
+      "CREATION": "CREATION",
+      "MODIFICATION": "MODIFICATION",
+      "REACTIVATION": "REACTIVATION",
+      "RESET": "RESET"
+    }
+  }
+}

@@ -1,0 +1,129 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-conge-heading" data-cy="CongeCreateUpdateHeading" jhiTranslate="smoConnectFrontendApp.conge.home.createOrEditLabel">
+        Créer ou éditer un Conge
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let dateDebutRef = editForm.get('dateDebut')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDebut" jhiTranslate="smoConnectFrontendApp.conge.dateDebut">Date Debut</label>
+          <div class="input-group">
+            <input
+              id="field_dateDebut"
+              data-cy="dateDebut"
+              type="text"
+              class="form-control"
+              name="dateDebut"
+              ngbDatepicker
+              #dateDebutDp="ngbDatepicker"
+              formControlName="dateDebut"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDebutDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+          @if (dateDebutRef.invalid && (dateDebutRef.dirty || dateDebutRef.touched)) {
+            <div>
+              @if (editForm.get('dateDebut')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let dateRetourRef = editForm.get('dateRetour')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dateRetour" jhiTranslate="smoConnectFrontendApp.conge.dateRetour">Date Retour</label>
+          <div class="input-group">
+            <input
+              id="field_dateRetour"
+              data-cy="dateRetour"
+              type="text"
+              class="form-control"
+              name="dateRetour"
+              ngbDatepicker
+              #dateRetourDp="ngbDatepicker"
+              formControlName="dateRetour"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateRetourDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+          @if (dateRetourRef.invalid && (dateRetourRef.dirty || dateRetourRef.touched)) {
+            <div>
+              @if (editForm.get('dateRetour')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_effectif" jhiTranslate="smoConnectFrontendApp.conge.effectif">Effectif</label>
+          <select
+            class="form-control"
+            id="field_effectif"
+            data-cy="effectif"
+            name="effectif"
+            formControlName="effectif"
+            [compareWith]="compareEffectif"
+          >
+            @if (editForm.get(['effectif'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (effectifOption of effectifsSharedCollection(); track $index) {
+              <option [ngValue]="effectifOption">{{ effectifOption.nom }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['effectif'])!.invalid && (editForm.get(['effectif'])!.dirty || editForm.get(['effectif'])!.touched)) {
+          <div>
+            @if (editForm.get(['effectif'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="smoConnectFrontendApp.conge.createdBy">Created By</label>
+          <select
+            class="form-control"
+            id="field_createdBy"
+            data-cy="createdBy"
+            name="createdBy"
+            formControlName="createdBy"
+            [compareWith]="compareUser"
+          >
+            <option [ngValue]="null"></option>
+            @for (userOption of usersSharedCollection(); track $index) {
+              <option [ngValue]="userOption">{{ userOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+{
+  "smoConnectFrontendApp": {
+    "TypeCompte": {
+      "null": "",
+      "INTERNE": "INTERNE",
+      "EXTERNE": "EXTERNE"
+    }
+  }
+}

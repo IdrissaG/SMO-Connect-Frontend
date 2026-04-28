@@ -1,0 +1,238 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-blacklist-heading"
+        data-cy="BlacklistCreateUpdateHeading"
+        jhiTranslate="smoConnectFrontendApp.blacklist.home.createOrEditLabel"
+      >
+        Créer ou éditer un Blacklist
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nomRef = editForm.get('nom')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_nom" jhiTranslate="smoConnectFrontendApp.blacklist.nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          @if (nomRef.invalid && (nomRef.dirty || nomRef.touched)) {
+            <div>
+              @if (editForm.get('nom')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let prenomRef = editForm.get('prenom')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_prenom" jhiTranslate="smoConnectFrontendApp.blacklist.prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+          @if (prenomRef.invalid && (prenomRef.dirty || prenomRef.touched)) {
+            <div>
+              @if (editForm.get('prenom')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let mobileRef = editForm.get('mobile')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_mobile" jhiTranslate="smoConnectFrontendApp.blacklist.mobile">Mobile</label>
+          <input type="text" class="form-control" name="mobile" id="field_mobile" data-cy="mobile" formControlName="mobile" />
+          @if (mobileRef.invalid && (mobileRef.dirty || mobileRef.touched)) {
+            <div>
+              @if (editForm.get('mobile')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '50' }"
+                  >Ce champ doit faire au maximum 50 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let cniRef = editForm.get('cni')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_cni" jhiTranslate="smoConnectFrontendApp.blacklist.cni">Cni</label>
+          <input type="text" class="form-control" name="cni" id="field_cni" data-cy="cni" formControlName="cni" />
+          @if (cniRef.invalid && (cniRef.dirty || cniRef.touched)) {
+            <div>
+              @if (editForm.get('cni')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '200' }"
+                  >Ce champ doit faire au maximum 200 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let emailRef = editForm.get('email')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_email" jhiTranslate="smoConnectFrontendApp.blacklist.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (emailRef.invalid && (emailRef.dirty || emailRef.touched)) {
+            <div>
+              @if (editForm.get('email')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '254' }"
+                  >Ce champ doit faire au maximum 254 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_faute" jhiTranslate="smoConnectFrontendApp.blacklist.faute">Faute</label>
+          <select class="form-control" name="faute" formControlName="faute" id="field_faute" data-cy="faute">
+            <option [ngValue]="null">{{ 'smoConnectFrontendApp.TypeFaute.null' | translate }}</option>
+            @for (typeFaute of typeFauteValues; track $index) {
+              <option [value]="typeFaute">{{ 'smoConnectFrontendApp.TypeFaute.' + typeFaute | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_commentaire" jhiTranslate="smoConnectFrontendApp.blacklist.commentaire">Commentaire</label>
+          <textarea
+            class="form-control"
+            name="commentaire"
+            id="field_commentaire"
+            data-cy="commentaire"
+            formControlName="commentaire"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateFaits" jhiTranslate="smoConnectFrontendApp.blacklist.dateFaits">Date Faits</label>
+          <div class="input-group">
+            <input
+              id="field_dateFaits"
+              data-cy="dateFaits"
+              type="text"
+              class="form-control"
+              name="dateFaits"
+              ngbDatepicker
+              #dateFaitsDp="ngbDatepicker"
+              formControlName="dateFaits"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateFaitsDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDetection" jhiTranslate="smoConnectFrontendApp.blacklist.dateDetection"
+            >Date Detection</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateDetection"
+              data-cy="dateDetection"
+              type="text"
+              class="form-control"
+              name="dateDetection"
+              ngbDatepicker
+              #dateDetectionDp="ngbDatepicker"
+              formControlName="dateDetection"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDetectionDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateRemontee" jhiTranslate="smoConnectFrontendApp.blacklist.dateRemontee"
+            >Date Remontee</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateRemontee"
+              data-cy="dateRemontee"
+              type="text"
+              class="form-control"
+              name="dateRemontee"
+              ngbDatepicker
+              #dateRemonteeDp="ngbDatepicker"
+              formControlName="dateRemontee"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateRemonteeDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+        </div>
+
+        @let activeRef = editForm.get('active')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_active" jhiTranslate="smoConnectFrontendApp.blacklist.active">Active</label>
+          <input type="checkbox" class="form-check" name="active" id="field_active" data-cy="active" formControlName="active" />
+          @if (activeRef.invalid && (activeRef.dirty || activeRef.touched)) {
+            <div>
+              @if (editForm.get('active')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_prestataire" jhiTranslate="smoConnectFrontendApp.blacklist.prestataire">Prestataire</label>
+          <select
+            class="form-control"
+            id="field_prestataire"
+            data-cy="prestataire"
+            name="prestataire"
+            formControlName="prestataire"
+            [compareWith]="comparePrestataire"
+          >
+            <option [ngValue]="null"></option>
+            @for (prestataireOption of prestatairesSharedCollection(); track $index) {
+              <option [ngValue]="prestataireOption">{{ prestataireOption.nom }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_plateau" jhiTranslate="smoConnectFrontendApp.blacklist.plateau">Plateau</label>
+          <select
+            class="form-control"
+            id="field_plateau"
+            data-cy="plateau"
+            name="plateau"
+            formControlName="plateau"
+            [compareWith]="comparePlateau"
+          >
+            <option [ngValue]="null"></option>
+            @for (plateauOption of plateausSharedCollection(); track $index) {
+              <option [ngValue]="plateauOption">{{ plateauOption.nom }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

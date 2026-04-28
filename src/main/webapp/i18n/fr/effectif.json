@@ -1,0 +1,60 @@
+{
+  "smoConnectFrontendApp": {
+    "effectif": {
+      "home": {
+        "title": "Effectifs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Effectif",
+        "createOrEditLabel": "Créer ou éditer un Effectif",
+        "notFound": "Aucun Effectif trouvé"
+      },
+      "created": "Un nouveau Effectif a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Effectif avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Effectif avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Effectif {{ id }} ?"
+      },
+      "detail": {
+        "title": "Effectif"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "email": "Email",
+      "mobile": "Mobile",
+      "cni": "Cni",
+      "genre": "Genre",
+      "matricule": "Matricule",
+      "matriculeNPlus1": "Matricule N Plus 1",
+      "cuid": "Cuid",
+      "loginReferenceSelfservice": "Login Reference Selfservice",
+      "typeContrat": "Type Contrat",
+      "typeCompte": "Type Compte",
+      "fonction": "Fonction",
+      "profil": "Profil",
+      "departement": "Departement",
+      "siteProduction": "Site Production",
+      "vague": "Vague",
+      "dateRemontee": "Date Remontee",
+      "dateDemarrageFormation": "Date Demarrage Formation",
+      "dateEntreeProd": "Date Entree Prod",
+      "dateSortie": "Date Sortie",
+      "dateReintegration": "Date Reintegration",
+      "actif": "Actif",
+      "nouveauAgent": "Nouveau Agent",
+      "envoyeTidjiCreation": "Envoye Tidji Creation",
+      "dateEnvoyeTidjiCreation": "Date Envoye Tidji Creation",
+      "envoyeTidjiReset": "Envoye Tidji Reset",
+      "envoyeTidjiReactivation": "Envoye Tidji Reactivation",
+      "dateEnvoyeTidjiReactivation": "Date Envoye Tidji Reactivation",
+      "envoyeTidjiModification": "Envoye Tidji Modification",
+      "dateEnvoyeTidjiModification": "Date Envoye Tidji Modification",
+      "prestataire": "Prestataire",
+      "plateau": "Plateau",
+      "departs": "Departs",
+      "conges": "Conges",
+      "resetPasswords": "Reset Passwords",
+      "emailsTraites": "Emails Traites"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165518"
+  },
+  "applications": ["*"],
+  "documentation": "TemplateModel - Modèle de fichier d'import",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "fichier",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "actif",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "TemplateModel",
+  "relationships": [],
+  "service": "serviceClass"
+}

@@ -1,0 +1,97 @@
+<div>
+  <h2 id="page-heading" data-cy="PlateauHeading">
+    <span jhiTranslate="smoConnectFrontendApp.plateau.home.title">Plateaus</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span jhiTranslate="smoConnectFrontendApp.plateau.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-plateau"
+        [routerLink]="['/plateau/new']"
+      >
+        <fa-icon icon="plus" />
+        <span jhiTranslate="smoConnectFrontendApp.plateau.home.createLabel">Créer un nouveau Plateau</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (plateaus().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="smoConnectFrontendApp.plateau.home.notFound">Aucun Plateau trouvé</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nom">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.plateau.nom">Nom</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prestataire.nom">
+              <div class="d-flex">
+                <span jhiTranslate="smoConnectFrontendApp.plateau.prestataire">Prestataire</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (plateau of plateaus(); track trackId(plateau)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/plateau', plateau.id, 'view']">{{ plateau.id }}</a>
+              </td>
+              <td>{{ plateau.nom }}</td>
+              <td>
+                @if (plateau.prestataire) {
+                  <div>
+                    <a [routerLink]="['/prestataire', plateau.prestataire.id, 'view']">{{ plateau.prestataire.nom }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/plateau', plateau.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/plateau', plateau.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(plateau)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

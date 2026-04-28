@@ -1,0 +1,99 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (blacklist(); as blacklistRef) {
+      <div>
+        <h2 data-cy="blacklistDetailsHeading"><span jhiTranslate="smoConnectFrontendApp.blacklist.detail.title">Blacklist</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ blacklistRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.nom">Nom</span></dt>
+          <dd>
+            <span>{{ blacklistRef.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.prenom">Prenom</span></dt>
+          <dd>
+            <span>{{ blacklistRef.prenom }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.mobile">Mobile</span></dt>
+          <dd>
+            <span>{{ blacklistRef.mobile }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.cni">Cni</span></dt>
+          <dd>
+            <span>{{ blacklistRef.cni }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.email">Email</span></dt>
+          <dd>
+            <span>{{ blacklistRef.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.faute">Faute</span></dt>
+          <dd>
+            <span [jhiTranslate]="'smoConnectFrontendApp.TypeFaute.' + (blacklistRef.faute ?? 'null')">{{
+              {
+                null: '',
+                FRAUDE: 'FRAUDE',
+                ARNAQUE: 'ARNAQUE',
+                COMPORTEMENT_ANORMAL: 'COMPORTEMENT_ANORMAL',
+                ABSENCE_NON_JUSTIFIEE: 'ABSENCE_NON_JUSTIFIEE',
+                AUTRE: 'AUTRE',
+              }[blacklistRef.faute ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.commentaire">Commentaire</span></dt>
+          <dd>
+            <span>{{ blacklistRef.commentaire }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.dateFaits">Date Faits</span></dt>
+          <dd>
+            <span>{{ blacklistRef.dateFaits | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.dateDetection">Date Detection</span></dt>
+          <dd>
+            <span>{{ blacklistRef.dateDetection | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.dateRemontee">Date Remontee</span></dt>
+          <dd>
+            <span>{{ blacklistRef.dateRemontee | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.active">Active</span></dt>
+          <dd>
+            <span>{{ blacklistRef.active }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.prestataire">Prestataire</span></dt>
+          <dd>
+            @if (blacklist()!.prestataire) {
+              <div>
+                <a [routerLink]="['/prestataire', blacklist()!.prestataire?.id, 'view']">{{ blacklistRef.prestataire?.nom }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.blacklist.plateau">Plateau</span></dt>
+          <dd>
+            @if (blacklist()!.plateau) {
+              <div>
+                <a [routerLink]="['/plateau', blacklist()!.plateau?.id, 'view']">{{ blacklistRef.plateau?.nom }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/blacklist', blacklistRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

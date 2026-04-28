@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165509"
+  },
+  "applications": ["*"],
+  "documentation": "Plateau - Unité organisationnelle au sein d'un prestataire",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    }
+  ],
+  "name": "Plateau",
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "prestataire",
+      "otherEntityRelationshipName": "plateaux",
+      "relationshipName": "prestataire",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "effectif",
+      "otherEntityRelationshipName": "plateau",
+      "relationshipName": "effectifs",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

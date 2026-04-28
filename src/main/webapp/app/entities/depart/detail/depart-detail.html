@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (depart(); as departRef) {
+      <div>
+        <h2 data-cy="departDetailsHeading"><span jhiTranslate="smoConnectFrontendApp.depart.detail.title">Depart</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ departRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.depart.dateDepart">Date Depart</span></dt>
+          <dd>
+            <span>{{ departRef.dateDepart | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.depart.motifDepart">Motif Depart</span></dt>
+          <dd>
+            <span [jhiTranslate]="'smoConnectFrontendApp.MotifDepart.' + (departRef.motifDepart ?? 'null')">{{
+              {
+                null: '',
+                DEMISSION: 'DEMISSION',
+                LICENCIEMENT: 'LICENCIEMENT',
+                FIN_DE_CONTRAT: 'FIN_DE_CONTRAT',
+                RETRAITE: 'RETRAITE',
+                ABANDON_DE_POSTE: 'ABANDON_DE_POSTE',
+                RUPTURE_CONVENTIONNELLE: 'RUPTURE_CONVENTIONNELLE',
+                DEPART_VOLONTAIRE: 'DEPART_VOLONTAIRE',
+                MUTATION: 'MUTATION',
+                INAPTITUDE_MEDICALE: 'INAPTITUDE_MEDICALE',
+                DECES: 'DECES',
+                AUTRE: 'AUTRE',
+              }[departRef.motifDepart ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.depart.desistementFormation">Desistement Formation</span></dt>
+          <dd>
+            <span>{{ departRef.desistementFormation | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.depart.dateRemontee">Date Remontee</span></dt>
+          <dd>
+            <span>{{ departRef.dateRemontee | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.depart.envoyeTidji">Envoye Tidji</span></dt>
+          <dd>
+            <span>{{ departRef.envoyeTidji }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.depart.effectif">Effectif</span></dt>
+          <dd>
+            @if (depart()!.effectif) {
+              <div>
+                <a [routerLink]="['/effectif', depart()!.effectif?.id, 'view']">{{ departRef.effectif?.nom }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/depart', departRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,74 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165520"
+  },
+  "applications": ["*"],
+  "documentation": "EmailTraite - Suivi des emails de réinitialisation traités (technique)",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "messageId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "dateReception",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nomExtrait",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "prenomExtrait",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "applicationExtrait",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "loginExtrait",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "traiteAvecSucces",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "erreur",
+      "fieldType": "TextBlob"
+    }
+  ],
+  "name": "EmailTraite",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "effectif",
+      "otherEntityRelationshipName": "emailsTraites",
+      "relationshipName": "effectif",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "resetPassword",
+      "otherEntityRelationshipName": "emailsTraites",
+      "relationshipName": "resetPassword",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

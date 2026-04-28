@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (uploadLog(); as uploadLogRef) {
+      <div>
+        <h2 data-cy="uploadLogDetailsHeading"><span jhiTranslate="smoConnectFrontendApp.uploadLog.detail.title">Upload Log</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ uploadLogRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.uploadLog.typeFichier">Type Fichier</span></dt>
+          <dd>
+            <span [jhiTranslate]="'smoConnectFrontendApp.TypeFichier.' + (uploadLogRef.typeFichier ?? 'null')">{{
+              { null: '', EFFECTIF: 'EFFECTIF', DEPART: 'DEPART', DEPART_MANUEL: 'DEPART_MANUEL' }[uploadLogRef.typeFichier ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.uploadLog.nomFichier">Nom Fichier</span></dt>
+          <dd>
+            <span>{{ uploadLogRef.nomFichier }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.uploadLog.nombreLignes">Nombre Lignes</span></dt>
+          <dd>
+            <span>{{ uploadLogRef.nombreLignes }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.uploadLog.succesCount">Succes Count</span></dt>
+          <dd>
+            <span>{{ uploadLogRef.succesCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.uploadLog.erreurCount">Erreur Count</span></dt>
+          <dd>
+            <span>{{ uploadLogRef.erreurCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.uploadLog.doublonCount">Doublon Count</span></dt>
+          <dd>
+            <span>{{ uploadLogRef.doublonCount }}</span>
+          </dd>
+          <dt><span jhiTranslate="smoConnectFrontendApp.uploadLog.entite">Entite</span></dt>
+          <dd>
+            <span>{{ uploadLogRef.entite }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/upload-log', uploadLogRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

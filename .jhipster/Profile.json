@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165510"
+  },
+  "applications": ["*"],
+  "documentation": "Profile - Profil utilisateur (interne ou prestataire)",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "typeUtilisateur",
+      "fieldType": "TypeUtilisateur",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "INTERNE,PRESTATAIRE"
+    },
+    {
+      "fieldName": "matricule",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "structure",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    }
+  ],
+  "name": "Profile",
+  "relationships": [
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "prestataire",
+      "relationshipName": "prestataire",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "plateau",
+      "relationshipName": "plateau",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

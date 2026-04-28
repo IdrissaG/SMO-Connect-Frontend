@@ -1,0 +1,17 @@
+export enum TypeContrat {
+  CDI = 'CDI',
+
+  CDD = 'CDD',
+
+  STAGE = 'STAGE',
+
+  FREELANCE = 'FREELANCE',
+
+  CONSULTANT = 'CONSULTANT',
+
+  PRESTATAIRE = 'PRESTATAIRE',
+
+  INTERIMAIRE = 'INTERIMAIRE',
+
+  AUTRE = 'AUTRE',
+}

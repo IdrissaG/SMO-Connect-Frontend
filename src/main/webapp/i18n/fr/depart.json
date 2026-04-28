@@ -1,0 +1,29 @@
+{
+  "smoConnectFrontendApp": {
+    "depart": {
+      "home": {
+        "title": "Departs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Depart",
+        "createOrEditLabel": "Créer ou éditer un Depart",
+        "notFound": "Aucun Depart trouvé"
+      },
+      "created": "Un nouveau Depart a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Depart avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Depart avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Depart {{ id }} ?"
+      },
+      "detail": {
+        "title": "Depart"
+      },
+      "id": "ID",
+      "dateDepart": "Date Depart",
+      "motifDepart": "Motif Depart",
+      "desistementFormation": "Desistement Formation",
+      "dateRemontee": "Date Remontee",
+      "envoyeTidji": "Envoye Tidji",
+      "effectif": "Effectif"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "annotations": {
+    "changelogDate": "20260428165519"
+  },
+  "applications": ["*"],
+  "documentation": "UploadLog - Journal des imports de fichiers (technique)",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "typeFichier",
+      "fieldType": "TypeFichier",
+      "fieldTypeDocumentation": "SMOConnect - JHipster Domain Language (JDL)\\nGénéré depuis les modèles Django et le diagramme de classe UML",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EFFECTIF,DEPART,DEPART_MANUEL"
+    },
+    {
+      "fieldName": "nomFichier",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "fieldName": "nombreLignes",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "succesCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "erreurCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "doublonCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "entite",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "name": "UploadLog",
+  "pagination": "pagination",
+  "relationships": [],
+  "service": "serviceClass"
+}

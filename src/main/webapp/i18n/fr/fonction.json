@@ -1,0 +1,20 @@
+{
+  "smoConnectFrontendApp": {
+    "Fonction": {
+      "null": "",
+      "FM_OPS": "FM_OPS",
+      "CSO": "CSO",
+      "RESPONSABLE_DE_COMPTE": "RESPONSABLE_DE_COMPTE",
+      "AUDITEUR": "AUDITEUR",
+      "RTM": "RTM",
+      "REPORTING": "REPORTING",
+      "MANAGER_COPC": "MANAGER_COPC",
+      "PERFORMANCE_MANAGER": "PERFORMANCE_MANAGER",
+      "FORMATEUR": "FORMATEUR",
+      "CC": "CC",
+      "CC_REFERENT": "CC_REFERENT",
+      "BUA": "BUA",
+      "CC_DEPORTE": "CC_DEPORTE"
+    }
+  }
+}

@@ -1,0 +1,150 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-upload-log-heading"
+        data-cy="UploadLogCreateUpdateHeading"
+        jhiTranslate="smoConnectFrontendApp.uploadLog.home.createOrEditLabel"
+      >
+        Créer ou éditer un Upload Log
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let typeFichierRef = editForm.get('typeFichier')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_typeFichier" jhiTranslate="smoConnectFrontendApp.uploadLog.typeFichier">Type Fichier</label>
+          <select class="form-control" name="typeFichier" formControlName="typeFichier" id="field_typeFichier" data-cy="typeFichier">
+            <option [ngValue]="null">{{ 'smoConnectFrontendApp.TypeFichier.null' | translate }}</option>
+            @for (typeFichier of typeFichierValues; track $index) {
+              <option [value]="typeFichier">{{ 'smoConnectFrontendApp.TypeFichier.' + typeFichier | translate }}</option>
+            }
+          </select>
+          @if (typeFichierRef.invalid && (typeFichierRef.dirty || typeFichierRef.touched)) {
+            <div>
+              @if (editForm.get('typeFichier')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let nomFichierRef = editForm.get('nomFichier')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_nomFichier" jhiTranslate="smoConnectFrontendApp.uploadLog.nomFichier">Nom Fichier</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nomFichier"
+            id="field_nomFichier"
+            data-cy="nomFichier"
+            formControlName="nomFichier"
+          />
+          @if (nomFichierRef.invalid && (nomFichierRef.dirty || nomFichierRef.touched)) {
+            <div>
+              @if (editForm.get('nomFichier')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+              @if (editForm.get('nomFichier')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >Ce champ doit faire au maximum 255 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nombreLignes" jhiTranslate="smoConnectFrontendApp.uploadLog.nombreLignes"
+            >Nombre Lignes</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nombreLignes"
+            id="field_nombreLignes"
+            data-cy="nombreLignes"
+            formControlName="nombreLignes"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_succesCount" jhiTranslate="smoConnectFrontendApp.uploadLog.succesCount">Succes Count</label>
+          <input
+            type="number"
+            class="form-control"
+            name="succesCount"
+            id="field_succesCount"
+            data-cy="succesCount"
+            formControlName="succesCount"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_erreurCount" jhiTranslate="smoConnectFrontendApp.uploadLog.erreurCount">Erreur Count</label>
+          <input
+            type="number"
+            class="form-control"
+            name="erreurCount"
+            id="field_erreurCount"
+            data-cy="erreurCount"
+            formControlName="erreurCount"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_doublonCount" jhiTranslate="smoConnectFrontendApp.uploadLog.doublonCount"
+            >Doublon Count</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="doublonCount"
+            id="field_doublonCount"
+            data-cy="doublonCount"
+            formControlName="doublonCount"
+          />
+        </div>
+
+        @let entiteRef = editForm.get('entite')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_entite" jhiTranslate="smoConnectFrontendApp.uploadLog.entite">Entite</label>
+          <input type="text" class="form-control" name="entite" id="field_entite" data-cy="entite" formControlName="entite" />
+          @if (entiteRef.invalid && (entiteRef.dirty || entiteRef.touched)) {
+            <div>
+              @if (editForm.get('entite')?.errors?.maxlength) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >Ce champ doit faire au maximum 100 caractères.</small
+                >
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

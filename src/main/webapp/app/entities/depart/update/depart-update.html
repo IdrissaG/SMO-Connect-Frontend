@@ -1,0 +1,143 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-depart-heading" data-cy="DepartCreateUpdateHeading" jhiTranslate="smoConnectFrontendApp.depart.home.createOrEditLabel">
+        Créer ou éditer un Depart
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="global.field.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDepart" jhiTranslate="smoConnectFrontendApp.depart.dateDepart">Date Depart</label>
+          <div class="input-group">
+            <input
+              id="field_dateDepart"
+              data-cy="dateDepart"
+              type="text"
+              class="form-control"
+              name="dateDepart"
+              ngbDatepicker
+              #dateDepartDp="ngbDatepicker"
+              formControlName="dateDepart"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateDepartDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_motifDepart" jhiTranslate="smoConnectFrontendApp.depart.motifDepart">Motif Depart</label>
+          <select class="form-control" name="motifDepart" formControlName="motifDepart" id="field_motifDepart" data-cy="motifDepart">
+            <option [ngValue]="null">{{ 'smoConnectFrontendApp.MotifDepart.null' | translate }}</option>
+            @for (motifDepart of motifDepartValues; track $index) {
+              <option [value]="motifDepart">{{ 'smoConnectFrontendApp.MotifDepart.' + motifDepart | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_desistementFormation" jhiTranslate="smoConnectFrontendApp.depart.desistementFormation"
+            >Desistement Formation</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_desistementFormation"
+              data-cy="desistementFormation"
+              type="datetime-local"
+              class="form-control"
+              name="desistementFormation"
+              formControlName="desistementFormation"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateRemontee" jhiTranslate="smoConnectFrontendApp.depart.dateRemontee">Date Remontee</label>
+          <div class="input-group">
+            <input
+              id="field_dateRemontee"
+              data-cy="dateRemontee"
+              type="text"
+              class="form-control"
+              name="dateRemontee"
+              ngbDatepicker
+              #dateRemonteeDp="ngbDatepicker"
+              formControlName="dateRemontee"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateRemonteeDp.toggle()"><fa-icon icon="calendar-alt" /></button>
+          </div>
+        </div>
+
+        @let envoyeTidjiRef = editForm.get('envoyeTidji')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_envoyeTidji" jhiTranslate="smoConnectFrontendApp.depart.envoyeTidji">Envoye Tidji</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="envoyeTidji"
+            id="field_envoyeTidji"
+            data-cy="envoyeTidji"
+            formControlName="envoyeTidji"
+          />
+          @if (envoyeTidjiRef.invalid && (envoyeTidjiRef.dirty || envoyeTidjiRef.touched)) {
+            <div>
+              @if (editForm.get('envoyeTidji')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_effectif" jhiTranslate="smoConnectFrontendApp.depart.effectif">Effectif</label>
+          <select
+            class="form-control"
+            id="field_effectif"
+            data-cy="effectif"
+            name="effectif"
+            formControlName="effectif"
+            [compareWith]="compareEffectif"
+          >
+            @if (editForm.get(['effectif'])!.value === null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (effectifOption of effectifsSharedCollection(); track $index) {
+              <option [ngValue]="effectifOption">{{ effectifOption.nom }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['effectif'])!.invalid && (editForm.get(['effectif'])!.dirty || editForm.get(['effectif'])!.touched)) {
+          <div>
+            @if (editForm.get(['effectif'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
