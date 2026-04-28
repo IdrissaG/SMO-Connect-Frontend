@@ -27,7 +27,10 @@ spring:
       config:
         enabled: false
       enabled: false
-  jackson2:
+  # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
+  liquibase:
+    contexts: test
+  jackson:
     serialization:
       write-durations-as-timestamps: false
   mail:
@@ -37,16 +40,14 @@ spring:
   messages:
     basename: i18n/messages
   security:
-    user:
-      name: test
-      password: test
-      roles:
-        - USER
     oauth2:
+      client:
+        provider:
+          oidc:
+            issuer-uri: http://DO_NOT_CALL:9080/realms/jhipster
       resourceserver:
         jwt:
-          authority-prefix: ''
-          authorities-claim-name: auth
+          principal-claim-name: preferred_username
   task:
     execution:
       thread-name-prefix: smo-connect-frontend-task-
@@ -84,14 +85,6 @@ jhipster:
       host: localhost
       port: 5000
       ring-buffer-size: 512
-  security:
-    authentication:
-      jwt:
-        # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: ZmIyYTJmODg3ZGI0NWY5M2VjMGEwOGE4YTIxYmNiMTA1MmYyN2UzZjNhNTk3N2RlMWE2YjhiMTU0NTkyMTllOTEyNjc0ZWNlNTY2NmY4NGU2ZGFjODg2ZmM2NjUxNGNkMDBkZDFkNGM2MTIzODhkNzdlM2U5OTBkOWNmYWZjYTI=
-        # Token is valid 24 hours
-        token-validity-in-seconds: 86400
-        token-validity-in-seconds-for-remember-me: 86400
 
 # ===================================================================
 # Application specific properties

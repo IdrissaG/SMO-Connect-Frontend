@@ -3,7 +3,7 @@
 
 <configuration scan="true">
     <!-- Patterns based on https://github.com/spring-projects/spring-boot/blob/v3.0.0/spring-boot-project/spring-boot/src/main/resources/org/springframework/boot/logging/logback/defaults.xml -->
-    <conversionRule conversionWord="crlf" converterClass="com.mycompany.myapp.config.CRLFLogConverter" />
+    <conversionRule conversionWord="crlf" converterClass="sn.sonatel.dsi.ftsirc.config.CRLFLogConverter" />
     <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %crlf(%m){red} %n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
     <!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
     <!--
@@ -27,7 +27,7 @@
     </root>
     -->
 
-    <logger name="com.mycompany.myapp" level="INFO"/>
+    <logger name="sn.sonatel.dsi.ftsirc" level="INFO"/>
 
     <logger name="angus.activation" level="WARN"/>
     <logger name="jakarta.activation" level="WARN"/>
@@ -43,6 +43,8 @@
     <logger name="com.sun" level="WARN"/>
     <logger name="com.zaxxer" level="WARN"/>
     <logger name="io.netty" level="WARN"/>
+    <logger name="io.asyncer.r2dbc.mysql" level="WARN"/>
+    <logger name="io.r2dbc" level="WARN"/>
     <logger name="org.apache" level="WARN"/>
     <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
     <logger name="org.bson" level="WARN"/>
@@ -65,6 +67,8 @@
     <!-- See https://github.com/jhipster/generator-jhipster/issues/14444 -->
     <logger name="_org.springframework.web.reactive.HandlerMapping.Mappings" level="INFO"/>
     <logger name="org.springframework.boot.docker" level="WARN"/>
+    <logger name="liquibase" level="WARN"/>
+    <logger name="LiquibaseSchemaResolver" level="INFO"/>
     <!-- jhipster-needle-logback-add-log - JHipster will add a new log with level -->
 
     <springProperty name="log.level" source="logging.level.root" defaultValue="INFO" />
